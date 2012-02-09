@@ -1,0 +1,21 @@
+%h1 
+  New song in the key of
+  = @key
+
+- @song_chords.each do |chords|
+  %p
+    = chords.to_s
+%p
+= form_tag(add_to_songs_path, :method=>:get) do
+  = select_tag(:note, options_from_collection_for_select(@notes, :name, :name))
+  = submit_tag 'Add note'
+%p
+= form_tag(add_to_songs_path, :method=>:get) do
+  = select_tag(:chord, options_from_collection_for_select(@notes, :description, :description))
+  = submit_tag 'Add chord'
+%p
+= form_tag(add_to_songs_path, :method=>:get) do
+  = select_tag(:progression, options_from_collection_for_select(@progressions, :id, :name))
+  = submit_tag 'Add progression'
+  
+= link_to 'Restart with a new key', root_path

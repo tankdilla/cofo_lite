@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @note.name
+%p
+  %b Alt name:
+  = @note.alt_name
+
+= link_to 'Edit', edit_note_path(@note)
+\|
+= link_to 'Back', notes_path

@@ -1,0 +1,8 @@
+%h1 Welcome to COFO Online
+%p Select a key (scale) to start in
+
+= form_tag(songs_path, :method=>:get) do
+  = select_tag(:key, options_from_collection_for_select(@notes, :name, :name))
+  
+  = submit_tag "Select", :name=>nil
+
