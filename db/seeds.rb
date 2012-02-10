@@ -273,3 +273,12 @@ ChordSymbol.create(:name=>"VII", :sort_order=>7)
 
 #ChordRelative.create(:chord_group => 1, :chord_symbol_id => 5)
 #ChordRelative.create(:chord_group => 1, :chord_symbol_id => 7)
+
+NoteType.delete_all
+NoteType.create(:name => "whole", :count => "4")
+NoteType.create(:name => "half", :count => "2")
+NoteType.create(:name => "quarter", :count => "1")
+NoteType.create(:name => "dotted half", :count => "3")
+NoteType.create(:name => "dotted quarter", :count => "1.5")
+NoteType.create(:name => "eighth", :count => "0.5")
+NoteType.create(:name => "sixteenth", :count => "0.25" )

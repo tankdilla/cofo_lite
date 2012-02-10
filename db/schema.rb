@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120209052153) do
+ActiveRecord::Schema.define(:version => 20120210173729) do
 
   create_table "chord_definitions", :force => true do |t|
     t.integer  "chord_id"
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(:version => 20120209052153) do
     t.integer  "half_step"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "measure_notes", :force => true do |t|
+    t.integer  "measure_id"
+    t.string   "note"
+    t.integer  "octave_number"
+    t.decimal  "position"
+    t.integer  "note_type_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "measures", :force => true do |t|
