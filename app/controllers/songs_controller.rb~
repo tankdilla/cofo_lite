@@ -10,6 +10,7 @@ class SongsController < ApplicationController
     
     if session[:song].nil?
     	session[:song] = Song.new({:note_id=>Note.find_by_name(session[:song_key])})
+    	session[:measures] = Array.new
     end
     
     @song_chords = session[:song_chords]

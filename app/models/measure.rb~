@@ -21,7 +21,7 @@ class Measure < ActiveRecord::Base
           :note=>note, 
           :octave_number => Measure.default_octave_number, 
           :note_type_id => NoteType.find_by_name("quarter").id, 
-          :position => get_next_position(1))
+          :position => get_next_position(1)
       elsif note.is_a?(Hash)
         measure_note = MeasureNote.new({:note=>note[:name], })
       end

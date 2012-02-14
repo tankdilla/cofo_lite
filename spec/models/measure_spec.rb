@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Measure do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "Add a note to a measure, creating a measure note" do
+  	it "should add a note to a measure" do
+  		
+  	end
+  end
 end
