@@ -3,8 +3,9 @@ class Song < ActiveRecord::Base
   before_create :set_default_values
   
   def add_to_song(note)
-    meausure = get_measure
+    measure = get_measure
     measure.add_to_measure(note)
+    measure
   end
 
   def edit_measure_note(measure_note)
@@ -12,12 +13,21 @@ class Song < ActiveRecord::Base
   end
   
   def get_measure
-    measure = measures.last
-    if self.measure.beats_left == 0
-      new_measure = Measure.new({:order=>measures.size+1})
-      self.measures << new_measure
-      new_measure
-    end
+  	if self.measures.empty?
+  		measure = Measure.new(:order=>1)
+  		self.measures << measure
+  	else
+  	
+		  last_measure = self.measures.last
+		  if last_measure.beats_left == 0
+		    measure = Measure.new({:order=>measures.size+1})
+		    self.measures << measure
+		  else
+		  	measure = last_measure
+		  end
+		end
+		
+		measure
   end
   
   private
