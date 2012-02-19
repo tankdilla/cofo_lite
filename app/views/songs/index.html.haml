@@ -2,9 +2,16 @@
   New song in the key of
   = @key
 
-- @song_chords.each do |chords|
-  %p
-    = chords.to_s
+/- @song_chords.each do |chords|
+/  %p
+/    = chords.to_s
+%table
+  - @song.measures.each do |measure|
+    %tr
+      %td
+        - measure.measure_notes.each do	|measure_note|
+          = measure_note.note
+  
 %p
 = form_tag(add_to_songs_path, :method=>:get) do
   = select_tag(:note, options_from_collection_for_select(@notes, :name, :name))

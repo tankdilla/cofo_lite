@@ -2,9 +2,9 @@ class Song < ActiveRecord::Base
   has_many :measures
   before_create :set_default_values
   
-  def add_to_song(note)
+  def add_to_song(options)
     measure = get_measure
-    measure.add_to_measure(note)
+    measure.add_to_measure(options)
     measure
   end
 

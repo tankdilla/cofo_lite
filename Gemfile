@@ -34,7 +34,7 @@ end
 # gem 'capistrano'
 
 # To use debugger
-#gem 'ruby-debug19', :require => 'ruby-debug', :group => [:development, :test]
+gem 'ruby-debug19', :require => 'ruby-debug', :group => [:development, :test]
 
 gem "cucumber-rails", :group => [:development, :test]
 gem "capybara", :group => [:development, :test]
