@@ -10,7 +10,7 @@
     %tr
       %td
         - measure.measure_notes.each do	|measure_note|
-          = measure_note.note
+          = measure_note.note.name
   
 %p
 = form_tag(add_to_songs_path, :method=>:get) do

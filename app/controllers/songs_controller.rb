@@ -22,7 +22,7 @@ class SongsController < ApplicationController
   def add_to
   	song = Song.find(session[:song])
     if params[:note]
-      song.add_to_song(:note=>params[:note])
+      song.add_to_song(:note=>Note.find_by_name(params[:note]))
     elsif params[:chord]
       chord_params = params[:chord].split(',')
       chord_note = chord_params[0]
@@ -35,8 +35,7 @@ class SongsController < ApplicationController
       scale = Scale.create_scale(session[:song_key])
       progression_chords = progression.chords(scale)
       progression_chords.each do |progression_chord|
-        session[:song_chords] << progression_chord.show_notes
-        song.add_to_song(:chord => progression_chord.show_notes)
+        song.add_to_song(:chord => progression_chord)
       end
     end
     

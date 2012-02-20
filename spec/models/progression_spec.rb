@@ -22,6 +22,7 @@ describe Progression do
     end
     
     it 'should return 3 chords as the chords of the progression' do
+      @progression.chords(@scale).each{|chord| chord.class.should == Chord}
       @progression.chords(@scale).size.should == 3
     end
     

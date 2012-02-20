@@ -10,7 +10,7 @@ describe Song do
 	end
 	
 	it "should add a note to a song and return a measure with a C quarter note measure note" do
-		@song.add_to_song(:note=>"C")
+		@song.add_to_song(:note=>Note.find_by_name("C"))
 		@song.measures.should_not be_empty
 		@song.measures.size.should == 1
 		
@@ -19,7 +19,8 @@ describe Song do
 		song_measure.measure_notes.size.should == 1
 		
 		measure_note = song_measure.measure_notes.first
-		measure_note.note.should == "C"		
+		measure_note.note.should_not be_nil
+		measure_note.note.name.should == "C"		
 	end
 	
 end

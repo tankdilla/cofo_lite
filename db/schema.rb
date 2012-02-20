@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120210173729) do
+ActiveRecord::Schema.define(:version => 20120220030513) do
 
   create_table "chord_definitions", :force => true do |t|
     t.integer  "chord_id"
@@ -53,12 +53,12 @@ ActiveRecord::Schema.define(:version => 20120210173729) do
 
   create_table "measure_notes", :force => true do |t|
     t.integer  "measure_id"
-    t.string   "note"
+    t.integer  "note_id",       :limit => 255
     t.integer  "octave_number"
     t.decimal  "position"
     t.integer  "note_type_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "measures", :force => true do |t|
