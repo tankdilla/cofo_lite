@@ -61,6 +61,25 @@ class Measure < ActiveRecord::Base
     beats_per_measure - self.measure_notes.collect{|x| x.position}.max
   end
   
+  def positions
+    
+    #get all the note positions, sort them, then turn them to strings
+    measure_notes.collect{|x| x.position}.sort.uniq.collect{|n| n.to_s}
+  end
+  
+  def notes_by_position
+    note_hash = Hash.new
+    measure_notes.each do |measure_note|
+      position = measure_note.position.to_s
+      if note_hash[position].nil?
+        note_hash[position] = [measure_note]
+      else
+        note_hash[position] << measure_note
+      end
+    end
+    
+    note_hash
+  end
 #  private
 #  
 #  def set_measure

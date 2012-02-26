@@ -7,10 +7,13 @@
 /    = chords.to_s
 %table
   - @song.measures.each do |measure|
-    %tr
-      %td
-        - measure.measure_notes.each do	|measure_note|
-          = measure_note.note.name
+    - measure.positions.each do |pos|
+      %td(valign="top")
+        %table
+          - measure.notes_by_position[pos].each do |measure_note|
+            %tr
+              %td
+                = measure_note.note.name
   
 %p
 = form_tag(add_to_songs_path, :method=>:get) do
