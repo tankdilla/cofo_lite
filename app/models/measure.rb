@@ -1,6 +1,6 @@
 class Measure < ActiveRecord::Base
   belongs_to :song
-  has_many :measure_notes
+  has_many :measure_notes, :order=>'id desc, position asc'
 #  after_initialize :set_measure
   
   @@default_octave_number = 4
