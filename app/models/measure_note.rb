@@ -8,4 +8,8 @@ class MeasureNote < ActiveRecord::Base
 	def set_default_values
 		self.octave_number ||= 4
 	end
+	
+	def name
+	  note.name
+	end
 end

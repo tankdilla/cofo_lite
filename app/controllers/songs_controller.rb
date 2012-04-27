@@ -43,5 +43,10 @@ class SongsController < ApplicationController
     
     redirect_to songs_path
   end
+  
+  
+  def chord_melody
+    notes = %w{C D C}
+  end
 
 end

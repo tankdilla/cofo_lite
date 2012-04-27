@@ -3,10 +3,6 @@ class Chord < ActiveRecord::Base
   
   attr_accessor :chord_name, :notes
   
-#  def initialize
-#    @notes = Array.new
-#  end
-  
   def show_notes
     @notes.collect{|n| n.name}
   end
@@ -16,19 +12,19 @@ class Chord < ActiveRecord::Base
     self.notes.rotate(inversion_number)
   end
   
-  def add_7th
+  def add_7th(modifier)
     
   end
   
-  def add_9th
+  def add_9th(modifier)
     
   end
   
-  def add_11th
+  def add_11th(modifier)
     
   end
   
-  def add_13th
+  def add_13th(modifier)
     
   end
   

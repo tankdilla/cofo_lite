@@ -23,4 +23,10 @@ describe Song do
 		measure_note.note.name.should == "C"		
 	end
 	
+	describe "Chords for song melody" do
+	  it "should return a C major chord and F major chord given a melody note of C" do
+	    
+	  end
+	end
+	
 end
