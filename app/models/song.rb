@@ -1,5 +1,6 @@
 class Song < ActiveRecord::Base
-  has_many :measures
+  belongs_to :note
+  has_many :measures, :dependent=>:destroy
   before_create :set_default_values
   
   def add_to_song(options)

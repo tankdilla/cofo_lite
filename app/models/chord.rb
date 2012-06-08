@@ -1,7 +1,7 @@
 class Chord < ActiveRecord::Base
   has_many :chord_definitions
   
-  attr_accessor :chord_name, :notes
+  attr_accessor :chord_name, :notes, :root_note
   
   def show_notes
     @notes.collect{|n| n.name}
@@ -26,6 +26,19 @@ class Chord < ActiveRecord::Base
   
   def add_13th(modifier)
     
+  end
+  
+  def add_notes(chord_array)
+    @notes = chord_array
+    @root_note = chord_array[0]
+  end
+  
+  def get_chord_notes
+    self.chord_definitions.each do |d|
+      chord_array << scale.get_note({:scale_number => d.scale_number, :modifier => d.modifier})
+    end
+    
+    chord.notes = chord_array
   end
   
   class << self

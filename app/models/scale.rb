@@ -1,8 +1,12 @@
 class Scale
   attr_accessor :key_note, :mode, :scale_notes
   
-  def initialize
+  def initialize(key="")
     @scale_notes = Array.new
+    
+    #if !key.blank?
+    #  Scale.create_scale(key)
+    #end
   end
   
   def get_note(options)

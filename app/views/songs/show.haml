@@ -1,0 +1,48 @@
+%h1 
+  New song in the key of
+  = @key
+
+%p
+  Within the key of 
+  = @key
+  , we have the following notes within the scale, and the numbers associated with the notes:
+%p
+  %table
+    %tr
+      - @notes.each_with_index do |note, index|
+        %td
+          %table
+            %tr
+              %td
+                = index+1
+            %tr
+              %td
+                = note.name
+
+%table
+  - @song.measures.each do |measure|
+    - measure.positions.each do |pos|
+      %td(valign="top")
+        %table
+          - measure.notes_by_position[pos].each do |measure_note|
+            %tr
+              %td
+                = measure_note.note.name + measure_note.octave_number.to_s
+  
+%p
+= form_tag(song_add_to_path(@song)) do
+  = select_tag(:note, options_from_collection_for_select(@notes, :name, :name))
+  = submit_tag 'Add note'
+%p
+= form_tag(song_add_to_path(@song)) do
+  = select_tag(:chord, options_from_collection_for_select(@notes, :description, :description))
+  = submit_tag 'Add chord'
+%p
+= form_tag(song_add_to_path(@song)) do
+  = select_tag(:progression, options_from_collection_for_select(@progressions, :id, :name))
+  = submit_tag 'Add progression'
+
+%br
+= link_to 'Restart with a new key', root_path
+%br
+= link_to 'Clear Song', song_clear_path(@song)

@@ -1,7 +1,12 @@
-%h1 Welcome to COFO Online
-%p Select a key (scale) to start in
+%h1 Circle of Fifths Music Maker
 
-= form_tag(songs_path, :method=>:get) do
+%p Anyone can make music by understanding the circle of fifths and understanding the numbering system for chords.
+
+%p This app will let you experiment with creating music by giving you a selection of notes, chords, and progressions that serve as the building blocks of any and every song.
+
+%p To begin, select a key (scale) to start in
+
+= form_tag(songs_path, :method=>:post) do
   = select_tag(:key, options_from_collection_for_select(@notes, :name, :name))
   
   = submit_tag "Select", :name=>nil

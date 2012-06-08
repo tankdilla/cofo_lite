@@ -1,5 +1,5 @@
 class Measure < ActiveRecord::Base
-  belongs_to :song
+  belongs_to :song, :dependent=>:destroy
   has_many :measure_notes, :order=>'id desc, position asc'
 #  after_initialize :set_measure
   

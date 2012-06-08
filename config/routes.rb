@@ -13,7 +13,8 @@ CofoLite::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 	resources :songs do
-    get 'add_to', :on=>:collection
+    post 'add_to'
+    get 'clear'
   end
   # Sample resource route with options:
   #   resources :products do

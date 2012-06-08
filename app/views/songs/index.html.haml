@@ -1,31 +1,19 @@
 %h1 
-  New song in the key of
-  = @key
+  Songs created
 
-/- @song_chords.each do |chords|
-/  %p
-/    = chords.to_s
 %table
-  - @song.measures.each do |measure|
-    - measure.positions.each do |pos|
-      %td(valign="top")
-        %table
-          - measure.notes_by_position[pos].each do |measure_note|
-            %tr
-              %td
-                = measure_note.note.name
-  
-%p
-= form_tag(add_to_songs_path, :method=>:get) do
-  = select_tag(:note, options_from_collection_for_select(@notes, :name, :name))
-  = submit_tag 'Add note'
-%p
-= form_tag(add_to_songs_path, :method=>:get) do
-  = select_tag(:chord, options_from_collection_for_select(@notes, :description, :description))
-  = submit_tag 'Add chord'
-%p
-= form_tag(add_to_songs_path, :method=>:get) do
-  = select_tag(:progression, options_from_collection_for_select(@progressions, :id, :name))
-  = submit_tag 'Add progression'
-  
-= link_to 'Restart with a new key', root_path
+  - @songs.each do |song|
+    %tr
+      %td
+        = link_to song.id, song_url(song)
+      %td
+        = song.time_signature
+      %td
+        = song.tempo
+      %td
+        = song.measures.count
+        measures
+      %td
+        created
+        = song.created_at.strftime("%m/%d/%Y")
+

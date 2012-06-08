@@ -37,8 +37,13 @@ describe Position do
   end
   
   it "should return a chord for notes in a position" do
+    MeasureNote.stub(:where).and_return(@measure_notes)
+    
     position = Position.new(:song=>@song, :measure=>@measure, :position=>1)
-    position.chord.class.should == Chord
+    chord = position.chord
+    chord.class.should == Chord
+    chord.notes.each{|c| c.class.should == MeasureNote}
+    
   end
   
 end

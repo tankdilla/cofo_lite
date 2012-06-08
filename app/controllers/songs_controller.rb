@@ -1,13 +1,21 @@
 class SongsController < ApplicationController
   def index
-#    session[:song_chords] ||= Array.new    
-    session[:song_key] ||= params[:key]    
-  	session[:song] ||= Song.create!({:note_id=>Note.find_by_name(session[:song_key])}).id
+    @songs = Song.all
+  end
+  
+  def show
+    
+    if !params[:id].nil?
+      session[:song] = Song.where(:id=>params[:id].to_i).first.id
+    else
+      session[:song] ||= Song.create!({:note_id=>Note.find_by_name(session[:song_key])}).id
+    end
     
     @song_chords = session[:song_chords]
     @song = Song.find(session[:song])
     
-    @key = session[:song_key]
+    @key = session[:song_key] = @song.note.name
+    
     if session[:scale].nil?
       scale = Scale.create_scale(@key)
     else
@@ -16,7 +24,12 @@ class SongsController < ApplicationController
     
     @notes = scale.scale_notes
     @progressions = Progression.all
+  end
+  
+  def create
+    session[:song] = Song.create!({:note_id=>Note.find_by_name(params[:key]).id}).id
     
+    redirect_to song_path(session[:song])
   end
   
   def add_to
@@ -41,12 +54,18 @@ class SongsController < ApplicationController
     
     song.save!
     
-    redirect_to songs_path
+    redirect_to song_path(song)
   end
   
   
   def chord_melody
     notes = %w{C D C}
+  end
+  
+  def clear
+    song = Song.find(session[:song])
+    song.measures.each{|m| Measure.delete(m)}
+    redirect_to song_path(song)
   end
 
 end
