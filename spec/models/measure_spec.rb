@@ -136,6 +136,12 @@ describe Measure do
     	end
     	
     	it "should return positions array with 4 elements = [1,2,3,4]" do
+    	  @measure.add_to_measure(:chord=>@c_chord)
+    	  
+    	  @measure.positions.should == ["1.0","2.0"]
+    	end
+    	
+    	it "should return positions array with 4 elements = [1,2,3,4]" do
     	  3.times {@measure.add_to_measure(:chord=>@c_chord)}
     	  
     	  @measure.positions.should == ["1.0","2.0","3.0","4.0"]
@@ -169,5 +175,6 @@ describe Measure do
   	    end
   	  end
     end
+    
   end
 end

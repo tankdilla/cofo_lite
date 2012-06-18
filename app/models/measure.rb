@@ -38,11 +38,13 @@ class Measure < ActiveRecord::Base
       
       next_position = get_next_position(1)
       note_type = NoteType.find_by_name("quarter").id
+      octave_number = Measure.default_octave_number
+      
       #ensure that all chord notes get created with the same attributes in MeasureNote
       options[:chord].notes.each do |note|
         self.measure_notes << MeasureNote.new(
           :note_id=>note.id, 
-          :octave_number => Measure.default_octave_number, 
+          :octave_number => (note.id > 8 ? octave_number + 1 : octave_number), 
           :note_type_id => note_type, 
           :position => next_position)
       end
