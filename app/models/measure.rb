@@ -86,9 +86,20 @@ class Measure < ActiveRecord::Base
   def chord_at_position(options)
     notes = get_notes_at_position(options[:position])
     
-    unless notes.empty?
-      chord_type = determine_chord(notes)
-    end
+    #unless notes.empty?
+    #  chord_type = determine_chord(notes)
+    #end
+    
+    get indexes based on chord notes
+    use indexes to find chord type
+    
+    chord_key = notes[0]
+    chord_key_scale = Scale.create_scale(chord_key, "all")
+    chord_key_scale_notes  = chord_key_scale.scale_notes.collect(&:name)
+    
+    note_positions = notes.collect{|n| chord_key_scale_notes.index(n)+1}
+    
+    note_positions = note_positions.collect{|n| n % 2 == 0 ? n+7 : n}
   end
   
   def determine_chord(notes)
