@@ -41,6 +41,7 @@ Mode.create(:name => "Lydian", :letter => "IV")
 Mode.create(:name => "Mixolydian", :letter => "V")
 Mode.create(:name => "Aeolian", :letter => "VI")
 Mode.create(:name => "Locrian", :letter => "VII")
+Mode.create(:name => "All", :letter => "all")
 
 ModeInterval.delete_all
 ModeInterval.create(:mode_id =>1, :interval_id =>2, :sort_order=>1)
@@ -98,6 +99,19 @@ ModeInterval.create(:mode_id =>7, :interval_id =>1, :sort_order=>4)
 ModeInterval.create(:mode_id =>7, :interval_id =>2, :sort_order=>5)
 ModeInterval.create(:mode_id =>7, :interval_id =>2, :sort_order=>6)
 ModeInterval.create(:mode_id =>7, :interval_id =>2, :sort_order=>7)
+
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>1)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>2)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>3)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>4)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>5)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>6)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>7)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>8)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>9)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>10)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>11)
+ModeInterval.create(:mode_id =>8, :interval_id =>1, :sort_order=>12)
 
 Chord.delete_all
 Chord.create(:name => "major", :abbrev => "maj", :abbrev_2 => "M")

@@ -52,5 +52,19 @@ describe Scale do
         @scale.get_note({:scale_number=>3, :modifier=>"b"}).name.should == "C"
       end
     end
+    
+    context 'testing the get_position method' do
+      it 'should return an integer' do
+        note, modifier = @scale.get_position(:note=>"A")
+        note.should be_a(Fixnum)
+        modifier.should be_nil
+      end
+      
+      it 'should return an integer and a modifier' do
+        note, modifier = @scale.get_position(:note=>"Db")
+        note.should be_a(Fixnum)
+        modifier.should == "b"
+      end
+    end
   end
 end

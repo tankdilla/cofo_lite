@@ -30,6 +30,22 @@ class Scale
       
   end
   
+  def get_position(options)
+    position = modifier = nil
+    if options[:note]
+      position = @scale_notes.index{|n| n.name == options[:note]}
+      
+      if position.nil?
+        #try with flat
+        position = @scale.scale_notes.index{|n| n.name == "#{options[:note]}b"}
+        modifier = "flat"
+      else
+        modifier = nil
+      end
+    end
+    [position, modifier]
+  end
+  
   def cycle(order)
     if order > 6
       order = order - 7

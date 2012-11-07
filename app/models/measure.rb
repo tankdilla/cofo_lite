@@ -82,6 +82,18 @@ class Measure < ActiveRecord::Base
     
     note_hash
   end
+  
+  def chord_at_position(options)
+    notes = get_notes_at_position(options[:position])
+    
+    unless notes.empty?
+      chord_type = determine_chord(notes)
+    end
+  end
+  
+  def determine_chord(notes)
+    
+  end
 #  private
 #  
 #  def set_measure

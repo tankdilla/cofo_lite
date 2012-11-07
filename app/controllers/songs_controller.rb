@@ -14,6 +14,8 @@ class SongsController < ApplicationController
     @song_chords = session[:song_chords]
     @song = Song.find(session[:song])
     
+    @chord_names = Chord.all
+    
     @key = session[:song_key] = @song.note.name
     
     if session[:scale].nil?
@@ -42,6 +44,11 @@ class SongsController < ApplicationController
       chord_number = chord_params[1]
       chord_symbol = ChordSymbol.find(chord_number.to_i)
       chord = Chord.create_chord({:base_note=>chord_note, :chord_letter=>chord_symbol.name})
+      song.add_to_song(:chord=>chord)
+    elsif params[:chord_note] && params[:chord_name]
+      chord_note = params[:chord_note]
+      chord_name = params[:chord_name]
+      chord = Chord.create_chord({:base_note=>chord_note, :chord_name=>chord_name})
       song.add_to_song(:chord=>chord)
     elsif params[:progression]
       progression = Progression.find(params[:progression])
