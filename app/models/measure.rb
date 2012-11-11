@@ -90,16 +90,19 @@ class Measure < ActiveRecord::Base
     #  chord_type = determine_chord(notes)
     #end
     
-    get indexes based on chord notes
-    use indexes to find chord type
+    #get indexes based on chord notes
+    #use indexes to find chord type
     
     chord_key = notes[0]
+    chord_key_all_scale = Scale.create_scale(chord_key, "all")
+    chord_key_all_scale_notes  = chord_key_all_scale.scale_notes.collect(&:name)
+    
     chord_key_scale = Scale.create_scale(chord_key, "all")
     chord_key_scale_notes  = chord_key_scale.scale_notes.collect(&:name)
     
-    note_positions = notes.collect{|n| chord_key_scale_notes.index(n)+1}
+    note_positions = notes.collect{|n| "#{chord_key_scale_notes.index(n)+1}"}
     
-    note_positions = note_positions.collect{|n| n % 2 == 0 ? n+7 : n}
+    note_positions = note_positions.collect{|n| n % 2 == 0 ? "#{b}n" : n}
   end
   
   def determine_chord(notes)

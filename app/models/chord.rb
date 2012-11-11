@@ -41,6 +41,22 @@ class Chord < ActiveRecord::Base
     chord.notes = chord_array
   end
   
+  def definition_string
+    unless chord_definitions.empty?
+      string = "#{root_note}#{abbrev} - "
+      chord_definitions.each do |d|
+        unless d.modifier.blank?
+          string << d.modifier
+        end
+        
+        string << d.scale_number
+      end
+    else
+      nil
+    end
+    
+  end
+  
   class << self
     def create_chord(chord_options)
       

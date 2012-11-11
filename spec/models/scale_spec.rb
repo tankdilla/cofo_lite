@@ -57,13 +57,15 @@ describe Scale do
       it 'should return an integer' do
         note, modifier = @scale.get_position(:note=>"A")
         note.should be_a(Fixnum)
+        note.should == 1
         modifier.should be_nil
       end
       
       it 'should return an integer and a modifier' do
-        note, modifier = @scale.get_position(:note=>"Db")
+        note, modifier = @scale.get_position(:note=>"D")
         note.should be_a(Fixnum)
         modifier.should == "b"
+        note.should == 3
       end
     end
   end

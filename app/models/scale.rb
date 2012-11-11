@@ -43,7 +43,7 @@ class Scale
         modifier = nil
       end
     end
-    [position, modifier]
+    [position+1, modifier]
   end
   
   def cycle(order)
