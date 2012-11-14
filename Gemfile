@@ -36,9 +36,9 @@ end
 
 group :development do
   gem "debugger"
+  gem "cucumber-rails"
 end
 
-gem "cucumber-rails", :group => [:development, :test]
 gem "capybara", :group => [:development, :test]
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
@@ -48,4 +48,4 @@ gem "factory_girl_rails"
 
 gem 'thin'
 
-gem "unimidi"
+gem "micromidi"

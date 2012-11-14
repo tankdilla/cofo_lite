@@ -28,6 +28,15 @@
             %tr
               %td
                 = measure_note.note.name + measure_note.octave_number.to_s
+          %tr
+            %td
+              *add note
+          %tr
+            %td
+              *invert
+          %tr
+            %td
+              *edit octaves
   
 %p
 = form_tag(song_add_to_path(@song)) do
@@ -47,6 +56,8 @@
   = select_tag(:progression, options_from_collection_for_select(@progressions, :id, :name))
   = submit_tag 'Add progression'
 
+%br
+= link_to 'Play', song_play_path(@song)
 %br
 = link_to 'Restart with a new key', root_path
 %br

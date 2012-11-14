@@ -74,5 +74,11 @@ class SongsController < ApplicationController
     song.measures.each{|m| Measure.delete(m)}
     redirect_to song_path(song)
   end
+  
+  def play
+    song = Song.find(session[:song])
+    song.play
+    redirect_to song_path(song)
+  end
 
 end

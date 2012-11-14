@@ -15,6 +15,7 @@ CofoLite::Application.routes.draw do
 	resources :songs do
     post 'add_to'
     get 'clear'
+    get 'play'
   end
   # Sample resource route with options:
   #   resources :products do

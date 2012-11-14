@@ -31,6 +31,21 @@ class Song < ActiveRecord::Base
 		measure
   end
   
+  def play
+    output = UniMIDI::Output.use(:first)
+
+    midi = MIDI::IO.new(output)
+      
+    self.measures.each do |measure|
+      measure.positions.each do |pos|
+        notes = measure.notes_by_position[pos].collect{|n| "#{n.note.name}#{n.octave_number}"}
+        
+        midi.play(notes, 0.5)
+      end
+    end
+    
+  end
+  
   private
   def set_default_values
     self.tempo ||= "Moderate"
