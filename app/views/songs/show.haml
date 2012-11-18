@@ -28,6 +28,12 @@
             %tr
               %td
                 = measure_note.note.name + measure_note.octave_number.to_s
+              %td
+                .note_edit
+                  = link_to "edit note", edit_song_measure_note_path(@song, measure_note), :remote=>true
+              %td
+                .options
+                /[measure_note]
           %tr
             %td
               /*add note
@@ -40,7 +46,7 @@
   
 %p
 = form_tag(song_add_to_path(@song)) do
-  = select_tag(:note, options_from_collection_for_select(@notes, :name, :name))
+  = render :partial => 'note_select', :locals=>{:notes=>@notes}
   = submit_tag 'Add note'
 %p
 = form_tag(song_add_to_path(@song)) do

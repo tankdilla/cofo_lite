@@ -16,7 +16,16 @@ CofoLite::Application.routes.draw do
     post 'add_to'
     get 'clear'
     get 'play'
+    
+    resources :measure_notes do
+      
+    end
+    
+    resources :measures do
+      
+    end
   end
+  
   # Sample resource route with options:
   #   resources :products do
   #     member do

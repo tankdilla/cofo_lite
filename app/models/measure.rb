@@ -17,6 +17,13 @@ class Measure < ActiveRecord::Base
     
   end
   
+  def clear(options)
+    if options[:position]
+      measure_notes_at_position = self.measure_notes.where(position: options[:position].to_i)
+      measure_notes_at_position.each(&:destroy)
+    end
+  end
+  
   def add_to_measure(options)
     if options[:note]
       note = options[:note]

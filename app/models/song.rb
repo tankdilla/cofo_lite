@@ -4,9 +4,39 @@ class Song < ActiveRecord::Base
   before_create :set_default_values
   
   def add_to_song(options)
-    measure = get_measure
+    if options[:measure]
+      measure = Measure.where(id: options[:measure])
+    else
+      measure = get_measure
+    end
+    
     measure.add_to_measure(options)
     measure
+  end
+  
+  def add_chord(options)
+    if options[:chord_string]
+      chord_params = chord.split(',')
+      chord_note = chord_params[0]
+      chord_number = chord_params[1]
+      chord_symbol = ChordSymbol.find(chord_number.to_i)
+      chord = Chord.create_chord({:base_note=>chord_note, :chord_letter=>chord_symbol.name})
+    elsif options[:name] && options[:note]
+      chord_note = params[:chord_note]
+      chord_name = params[:chord_name]
+      chord = Chord.create_chord({:base_note=>chord_note, :chord_name=>chord_name})
+    end
+      
+    add_to_song(:chord=>chord)
+  end
+  
+  def add_progression(options)
+    progression = Progression.find(options[:progression])
+    scale = Scale.create_scale(options[:song_key])
+    progression_chords = progression.chords(scale)
+    progression_chords.each do |progression_chord|
+      song.add_to_song(:chord => progression_chord)
+    end
   end
 
   def edit_measure_note(measure_note)

@@ -39,24 +39,11 @@ class SongsController < ApplicationController
     if params[:note]
       song.add_to_song(:note=>Note.find_by_name(params[:note]))
     elsif params[:chord]
-      chord_params = params[:chord].split(',')
-      chord_note = chord_params[0]
-      chord_number = chord_params[1]
-      chord_symbol = ChordSymbol.find(chord_number.to_i)
-      chord = Chord.create_chord({:base_note=>chord_note, :chord_letter=>chord_symbol.name})
-      song.add_to_song(:chord=>chord)
+      song.add_chord(:chord_string=>params[:chord])
     elsif params[:chord_note] && params[:chord_name]
-      chord_note = params[:chord_note]
-      chord_name = params[:chord_name]
-      chord = Chord.create_chord({:base_note=>chord_note, :chord_name=>chord_name})
-      song.add_to_song(:chord=>chord)
+      song.add_chord(:note=>params[:note], :name=>params[:name])
     elsif params[:progression]
-      progression = Progression.find(params[:progression])
-      scale = Scale.create_scale(session[:song_key])
-      progression_chords = progression.chords(scale)
-      progression_chords.each do |progression_chord|
-        song.add_to_song(:chord => progression_chord)
-      end
+      song.add_progression(:progression=>params[:progression], :song_key=>session[:song_key])
     end
     
     song.save!
