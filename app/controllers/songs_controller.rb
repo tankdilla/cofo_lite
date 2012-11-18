@@ -41,7 +41,7 @@ class SongsController < ApplicationController
     elsif params[:chord]
       song.add_chord(:chord_string=>params[:chord])
     elsif params[:chord_note] && params[:chord_name]
-      song.add_chord(:note=>params[:note], :name=>params[:name])
+      song.add_chord(:note=>params[:chord_note], :name=>params[:chord_name])
     elsif params[:progression]
       song.add_progression(:progression=>params[:progression], :song_key=>session[:song_key])
     end

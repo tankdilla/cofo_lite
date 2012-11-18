@@ -12,22 +12,26 @@ class MeasureNotesController < ApplicationController
   end
   
   def update
-    @measure_note = MeasureNote.where(params[:id]).first
+    @measure_note = MeasureNote.where(id: params[:id]).first
     song = Song.find(session[:song])
+    #debugger
     if @measure_note && params[:note]
       new_note = Note.find_by_name(params[:note])
       @measure_note.note = new_note
+      if params[:octave]
+        @measure_note.octave_number = params[:octave].to_i
+      end
       respond_to do |format|
         if @measure_note.save
-          format.html { redirect_to song_url(@song) }
+          format.html { redirect_to song_url(song) }
           format.js
         else
-          format.html { render action: "new" }
+          format.html { render action: "edit" }
         end
       end
     else
       respond_to do |format|
-        format.html { redirect_to song_url(@song) }
+        format.html { redirect_to song_url(song) }
         format.js
       end
     end

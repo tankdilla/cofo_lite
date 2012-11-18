@@ -16,14 +16,14 @@ class Song < ActiveRecord::Base
   
   def add_chord(options)
     if options[:chord_string]
-      chord_params = chord.split(',')
+      chord_params = options[:chord_string].split(',')
       chord_note = chord_params[0]
       chord_number = chord_params[1]
       chord_symbol = ChordSymbol.find(chord_number.to_i)
       chord = Chord.create_chord({:base_note=>chord_note, :chord_letter=>chord_symbol.name})
     elsif options[:name] && options[:note]
-      chord_note = params[:chord_note]
-      chord_name = params[:chord_name]
+      chord_note = options[:note]
+      chord_name = options[:name]
       chord = Chord.create_chord({:base_note=>chord_note, :chord_name=>chord_name})
     end
       
@@ -35,7 +35,7 @@ class Song < ActiveRecord::Base
     scale = Scale.create_scale(options[:song_key])
     progression_chords = progression.chords(scale)
     progression_chords.each do |progression_chord|
-      song.add_to_song(:chord => progression_chord)
+      add_to_song(:chord => progression_chord)
     end
   end
 

@@ -31,18 +31,30 @@
               %td
                 .note_edit
                   = link_to "edit note", edit_song_measure_note_path(@song, measure_note), :remote=>true
-              %td
-                .options
-                /[measure_note]
-          %tr
-            %td
-              /*add note
-          %tr
-            %td
-              /*invert
-          %tr
-            %td
-              /*edit octaves
+              = form_for [@song, measure_note] do
+                %td
+                  = render :partial=>'songs/note_select', :locals=>{:notes=>@notes}
+                  = select_tag :octave, options_for_select( (1..6).collect{|n| [n, n]} )
+                %td
+                  = submit_tag 'add'
+
+          = form_for song_measure_path(@song, measure, {:position=>pos}) do
+            %tr
+              %td{:colspan=>2}
+                *clear measure
+                = submit_tag 'clear measure'
+            %tr
+              %td{:colspan=>2}
+                *invert
+                = submit_tag 'invert up'
+            %tr
+              %td{:colspan=>2}
+                = submit_tag 'invert down'
+            %tr
+              %td{:colspan=>2}
+                = submit_tag 'replace with chord'
+                = select_tag(:chord_note, options_from_collection_for_select(@notes, :name, :name))
+                = select_tag(:chord_name, options_from_collection_for_select(@chord_names, :name, :name))
   
 %p
 = form_tag(song_add_to_path(@song)) do
