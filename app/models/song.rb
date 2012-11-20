@@ -15,17 +15,7 @@ class Song < ActiveRecord::Base
   end
   
   def add_chord(options)
-    if options[:chord_string]
-      chord_params = options[:chord_string].split(',')
-      chord_note = chord_params[0]
-      chord_number = chord_params[1]
-      chord_symbol = ChordSymbol.find(chord_number.to_i)
-      chord = Chord.create_chord({:base_note=>chord_note, :chord_letter=>chord_symbol.name})
-    elsif options[:name] && options[:note]
-      chord_note = options[:note]
-      chord_name = options[:name]
-      chord = Chord.create_chord({:base_note=>chord_note, :chord_name=>chord_name})
-    end
+    chord = Chord.formatted_chord(options)
       
     add_to_song(:chord=>chord)
   end

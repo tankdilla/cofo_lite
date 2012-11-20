@@ -62,6 +62,7 @@ describe Scale do
       end
       
       it 'should return an integer and a modifier' do
+        pending
         note, modifier = @scale.get_position(:note=>"D")
         note.should be_a(Fixnum)
         modifier.should == "b"

@@ -19,12 +19,28 @@ class Measure < ActiveRecord::Base
   
   def clear(options)
     if options[:position]
-      measure_notes_at_position = self.measure_notes.where(position: options[:position].to_i)
-      measure_notes_at_position.each(&:destroy)
+      self.measure_notes.where(position: options[:position]).delete_all
+      self.measure_notes.reload
     end
   end
   
+  def replace(position, options)
+    
+    if chord_object = Chord.formatted_chord(options)
+      clear(:position=>"1.0")
+      add_to_measure(:chord=>chord_object)
+    end
+    
+  end
+  
   def add_to_measure(options)
+    if options[:position]
+      position = options[:position]
+    else
+      position = nil
+    end
+    
+    #TODO: refactor this to be cleaner
     if options[:note]
       note = options[:note]
       if note.is_a?(Note)
@@ -33,7 +49,7 @@ class Measure < ActiveRecord::Base
           :note_id=>note.id, 
           :octave_number => Measure.default_octave_number, 
           :note_type_id => NoteType.find_by_name("quarter").id, 
-          :position => get_next_position(1))
+          :position => position || get_next_position(1))
         
       elsif note.is_a?(Hash)
         measure_note = MeasureNote.new({:note_id=>note.id})
@@ -54,7 +70,7 @@ class Measure < ActiveRecord::Base
           :note_id=>note.id, 
           :octave_number => octave_number, 
           :note_type_id => note_type, 
-          :position => next_position)
+          :position => position || next_position)
       end
       
     end

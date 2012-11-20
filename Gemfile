@@ -36,7 +36,11 @@ end
 
 group :development do
   gem "debugger"
-  gem "cucumber-rails"
+  gem "cucumber-rails", :require => false
+end
+
+group :test do
+  gem "debugger"
 end
 
 gem "capybara", :group => [:development, :test]

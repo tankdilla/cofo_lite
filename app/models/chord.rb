@@ -106,5 +106,23 @@ class Chord < ActiveRecord::Base
       
       chord
     end
+  
+    def formatted_chord(options)
+      chord_object = nil
+      
+      if options[:chord_string]
+        chord_params = options[:chord_string].split(',')
+        chord_note = chord_params[0]
+        chord_number = chord_params[1]
+        chord_symbol = ChordSymbol.find(chord_number.to_i)
+        chord_object = Chord.create_chord({:base_note=>chord_note, :chord_letter=>chord_symbol.name})
+      elsif options[:chord_name] && options[:chord_note]
+        chord_note = options[:chord_note]
+        chord_name = options[:chord_name]
+        chord_object = Chord.create_chord({:base_note=>chord_note, :chord_name=>chord_name})
+      end
+      
+      chord_object
+    end
   end
 end

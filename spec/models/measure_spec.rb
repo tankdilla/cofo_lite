@@ -167,12 +167,42 @@ describe Measure do
   	  end
   	  
   	  it "the notes should be in order" do
-  	    @measure.positions.each do |p|
-  	      @measure.notes_by_position[p][0].note.name.should == "G"
-  	      @measure.notes_by_position[p][1].note.name.should == "B"
-  	      @measure.notes_by_position[p][2].note.name.should == "D"
-  	      @measure.notes_by_position[p][3].note.name.should == "Gb"
-  	    end
+  	    @measure.positions.size.should == 1
+  	    @measure.positions.first.should == "1.0"
+  	    
+	      @measure.notes_by_position["1.0"][0].note.name.should == "G"
+	      @measure.notes_by_position["1.0"][1].note.name.should == "B"
+	      @measure.notes_by_position["1.0"][2].note.name.should == "D"
+	      @measure.notes_by_position["1.0"][3].note.name.should == "Gb"
+  	  end
+  	  
+  	  it "should clear notes from a position" do
+  	    @measure.notes_by_position["1.0"].size.should == 4
+  	    @measure.clear(:position=>"1.0")
+  	    
+  	    @measure.positions.include?("1.0").should be_false
+  	  end
+  	  
+  	  it "should replace notes at position 1.0 with new notes - using chord string" do
+  	    @measure.replace("1.0", :chord_string=>"F, 4")
+  	    @measure.positions.size.should == 1
+  	    @measure.positions.first.should == "1.0"
+  	    
+	      @measure.notes_by_position["1.0"][0].note.name.should == "F"
+	      @measure.notes_by_position["1.0"][1].note.name.should == "A"
+	      @measure.notes_by_position["1.0"][2].note.name.should == "C"
+	      @measure.notes_by_position["1.0"][3].note.name.should == "E"
+  	  end
+  	  
+  	  it "should replace notes at position 1.0 with new notes - using chord note and chord name" do
+  	    @measure.replace("1.0", {:chord_note=>"E", :chord_name=>"minor 7"})
+  	    @measure.positions.size.should == 1
+  	    @measure.positions.first.should == "1.0"
+  	    
+	      @measure.notes_by_position["1.0"][0].note.name.should == "E"
+	      @measure.notes_by_position["1.0"][1].note.name.should == "G"
+	      @measure.notes_by_position["1.0"][2].note.name.should == "B"
+	      @measure.notes_by_position["1.0"][3].note.name.should == "D"
   	  end
     end
     
