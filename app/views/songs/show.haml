@@ -38,14 +38,12 @@
                 %td
                   = submit_tag 'add'
 
-          = form_for song_measure_path(@song, measure, {:position=>pos}) do
+          = form_for :measure, :url=>song_measure_path(@song, measure, {:position=>pos}), :html=>{:method=>:put} do
             %tr
               %td{:colspan=>2}
-                *clear measure
-                = submit_tag 'clear measure'
+                = submit_tag 'clear'
             %tr
               %td{:colspan=>2}
-                *invert
                 = submit_tag 'invert up'
             %tr
               %td{:colspan=>2}

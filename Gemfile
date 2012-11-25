@@ -40,7 +40,8 @@ group :development do
 end
 
 group :test do
-  gem "debugger"
+  #gem "debugger"
+  gem "autotest"
 end
 
 gem "capybara", :group => [:development, :test]

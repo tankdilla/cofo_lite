@@ -13,21 +13,23 @@ class MeasuresController < ApplicationController
   
   def update
     @measure = Measure.where(id: params[:id]).first
+    #debugger
+    position = params[:position]
     song = Song.find(session[:song])
-    if params[:action] == 'replace'
-      
-      respond_to do |format|
-        if @measure.save
-          format.html { redirect_to song_url(@song) }
-          format.js
-        else
-          format.html { render action: "new" }
-        end
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to song_url(@song) }
+
+    if params[:commit] == 'clear'
+      @measure.clear(:position=>position)
+    elsif params[:commit] == 'replace with chord'
+      @measure.replace(position, params[:chord])
+      #@measure.invert(position, params[:invert])
+    end
+
+    respond_to do |format|
+      if @measure.save
+        format.html { redirect_to song_url(song) }
         format.js
+      else
+        format.html { render action: "new" }
       end
     end
   end
