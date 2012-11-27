@@ -29,6 +29,14 @@ class Song < ActiveRecord::Base
     end
   end
 
+  def scale
+    @scale ||= Scale.create_scale(note.name, "all")
+  end
+
+  def scale_notes
+    scale.scale_notes.collect(&:name)
+  end
+
   def edit_measure_note(measure_note)
     
   end

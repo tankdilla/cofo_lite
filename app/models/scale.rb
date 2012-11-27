@@ -8,6 +8,10 @@ class Scale
     #  Scale.create_scale(key)
     #end
   end
+
+  def note_position(letter)
+    scale_notes.collect(&:name).index(letter)+1
+  end
   
   def get_note(options)
     if !options[:scale_number].nil?

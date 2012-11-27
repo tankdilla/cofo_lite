@@ -20,8 +20,14 @@ class MeasuresController < ApplicationController
     if params[:commit] == 'clear'
       @measure.clear(:position=>position)
     elsif params[:commit] == 'replace with chord'
-      @measure.replace(position, params[:chord])
-      #@measure.invert(position, params[:invert])
+      #debugger
+      if params[:chord_note] && params[:chord_name]
+        @measure.replace(position, {:chord_note=>params[:chord_note], :chord_name=>params[:chord_name]})
+      elsif params[:chord]
+        @measure.replace(position, {:chord_string=>params[:chord]})
+      end
+    elsif params[:commit] =~ /^invert/
+      @measure.invert(position, params[:commit].split(" ")[1])
     end
 
     respond_to do |format|

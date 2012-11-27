@@ -23,7 +23,8 @@ describe Measure do
     end
     
   	before(:each) do
-  		@song = Song.new
+  		#@song = Song.new
+  		@song = Song.create({:note_id=>Note.find_by_name("C")})
   		@measure = @song.get_measure
   	end
   	
@@ -182,6 +183,15 @@ describe Measure do
   	    
   	    @measure.positions.include?("1.0").should be_false
   	  end
+
+      it "should clear a single note" do
+        @measure.notes_by_position["1.0"].size.should == 4
+        @measure.notes_by_position["1.0"].first.note.name.should == "G"
+
+        @measure.clear(:measure_note=>@measure.notes_by_position["1.0"].first)
+        @measure.notes_by_position["1.0"].size.should == 3
+        @measure.notes_by_position["1.0"].first.note.name.should == "B"
+      end
   	  
   	  it "should replace notes at position 1.0 with new notes - using chord string" do
   	    @measure.replace("1.0", :chord_string=>"F, 4")
@@ -204,6 +214,50 @@ describe Measure do
 	      @measure.notes_by_position["1.0"][2].note.name.should == "B"
 	      @measure.notes_by_position["1.0"][3].note.name.should == "D"
   	  end
+      
+      it "should invert up the chord at position 1" do
+	      @measure.notes_by_position["1.0"][0].note.name.should == "G"
+	      @measure.notes_by_position["1.0"][0].octave_number.should == 4
+	      @measure.notes_by_position["1.0"][1].note.name.should == "B"
+	      @measure.notes_by_position["1.0"][1].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][2].note.name.should == "D"
+	      @measure.notes_by_position["1.0"][2].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][3].note.name.should == "Gb"
+	      @measure.notes_by_position["1.0"][3].octave_number.should == 5
+        
+        @measure.invert("1.0", "up")
+
+	      @measure.notes_by_position["1.0"][0].note.name.should == "B"
+	      @measure.notes_by_position["1.0"][0].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][1].note.name.should == "D"
+	      @measure.notes_by_position["1.0"][1].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][2].note.name.should == "Gb"
+	      @measure.notes_by_position["1.0"][2].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][3].note.name.should == "G"
+	      @measure.notes_by_position["1.0"][3].octave_number.should == 5
+      end
+
+      it "should invert down the chord at position 1" do
+	      @measure.notes_by_position["1.0"][0].note.name.should == "G"
+	      @measure.notes_by_position["1.0"][0].octave_number.should == 4
+	      @measure.notes_by_position["1.0"][1].note.name.should == "B"
+	      @measure.notes_by_position["1.0"][1].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][2].note.name.should == "D"
+	      @measure.notes_by_position["1.0"][2].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][3].note.name.should == "Gb"
+	      @measure.notes_by_position["1.0"][3].octave_number.should == 5
+        
+        @measure.invert("1.0", "down")
+
+	      @measure.notes_by_position["1.0"][0].note.name.should == "Gb"
+	      @measure.notes_by_position["1.0"][0].octave_number.should == 4
+	      @measure.notes_by_position["1.0"][1].note.name.should == "G"
+	      @measure.notes_by_position["1.0"][1].octave_number.should == 4
+	      @measure.notes_by_position["1.0"][2].note.name.should == "B"
+	      @measure.notes_by_position["1.0"][2].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][3].note.name.should == "D"
+	      @measure.notes_by_position["1.0"][3].octave_number.should == 5
+      end
     end
     
   end

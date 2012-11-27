@@ -10,6 +10,6 @@ class MeasureNote < ActiveRecord::Base
 	end
 	
 	def name
-	  note.name
+	  note.name + octave_number.to_s
 	end
 end

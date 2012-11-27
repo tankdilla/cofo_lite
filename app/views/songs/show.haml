@@ -24,11 +24,11 @@
     - measure.positions.each do |pos|
       %td(valign="top")
         %table
-          - measure.notes_by_position[pos].each do |measure_note|
+          - measure.notes_by_position[pos].reverse.each do |measure_note|
             %tr
               %td
-                = measure_note.note.name + measure_note.octave_number.to_s
-              %td
+                = measure_note.name
+              %td{:hidden=>true}
                 .note_edit
                   = link_to "edit note", edit_song_measure_note_path(@song, measure_note), :remote=>true
               = form_for [@song, measure_note] do
