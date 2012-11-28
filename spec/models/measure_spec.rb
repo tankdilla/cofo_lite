@@ -219,7 +219,7 @@ describe Measure do
 	      @measure.notes_by_position["1.0"][0].note.name.should == "G"
 	      @measure.notes_by_position["1.0"][0].octave_number.should == 4
 	      @measure.notes_by_position["1.0"][1].note.name.should == "B"
-	      @measure.notes_by_position["1.0"][1].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][1].octave_number.should == 4
 	      @measure.notes_by_position["1.0"][2].note.name.should == "D"
 	      @measure.notes_by_position["1.0"][2].octave_number.should == 5
 	      @measure.notes_by_position["1.0"][3].note.name.should == "Gb"
@@ -228,7 +228,7 @@ describe Measure do
         @measure.invert("1.0", "up")
 
 	      @measure.notes_by_position["1.0"][0].note.name.should == "B"
-	      @measure.notes_by_position["1.0"][0].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][0].octave_number.should == 4
 	      @measure.notes_by_position["1.0"][1].note.name.should == "D"
 	      @measure.notes_by_position["1.0"][1].octave_number.should == 5
 	      @measure.notes_by_position["1.0"][2].note.name.should == "Gb"
@@ -241,7 +241,7 @@ describe Measure do
 	      @measure.notes_by_position["1.0"][0].note.name.should == "G"
 	      @measure.notes_by_position["1.0"][0].octave_number.should == 4
 	      @measure.notes_by_position["1.0"][1].note.name.should == "B"
-	      @measure.notes_by_position["1.0"][1].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][1].octave_number.should == 4
 	      @measure.notes_by_position["1.0"][2].note.name.should == "D"
 	      @measure.notes_by_position["1.0"][2].octave_number.should == 5
 	      @measure.notes_by_position["1.0"][3].note.name.should == "Gb"
@@ -254,7 +254,7 @@ describe Measure do
 	      @measure.notes_by_position["1.0"][1].note.name.should == "G"
 	      @measure.notes_by_position["1.0"][1].octave_number.should == 4
 	      @measure.notes_by_position["1.0"][2].note.name.should == "B"
-	      @measure.notes_by_position["1.0"][2].octave_number.should == 5
+	      @measure.notes_by_position["1.0"][2].octave_number.should == 4
 	      @measure.notes_by_position["1.0"][3].note.name.should == "D"
 	      @measure.notes_by_position["1.0"][3].octave_number.should == 5
       end
