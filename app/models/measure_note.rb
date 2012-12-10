@@ -12,4 +12,10 @@ class MeasureNote < ActiveRecord::Base
 	def name
 	  note.name + octave_number.to_s
 	end
+	
+	def invert(options)
+	  if options[:invert] && options[:invert].is_a?(Fixnum)
+	    self.octave_number += options[:invert]
+    end
+	end
 end

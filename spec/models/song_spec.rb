@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Song do
 	before(:each) do
-		@song = Song.new
+		@song = Song.create({:note_id=>Note.find_by_name("C")})
 	end
 	
 	it "should return a measure" do

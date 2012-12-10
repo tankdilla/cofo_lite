@@ -16,9 +16,14 @@ class MeasuresController < ApplicationController
     #debugger
     position = params[:position]
     song = Song.find(session[:song])
+    measure_note = params[:measure_note]
 
     if params[:commit] == 'clear'
-      @measure.clear(:position=>position)
+      if !position.blank?
+        @measure.clear(:position=>position)
+      elsif !measure_note.blank?
+        @measure.clear(:measure_note=>measure_note)
+      end
     elsif params[:commit] == 'replace with chord'
       #debugger
       if params[:chord_note] && params[:chord_name]

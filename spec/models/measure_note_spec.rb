@@ -55,7 +55,12 @@ describe MeasureNote do
     	end
     	
     	it "should invert the octave of the note" do
-    	  
+    	  measure_note = @measure.measure_notes.first
+    	  measure_note.octave_number.should == 4
+    	  measure_note.invert(:invert=>1)
+    	  measure_note.octave_number.should == 5
+    	  measure_note.invert(:invert=>-1)
+    	  measure_note.octave_number.should == 4
     	end
   	end
   	

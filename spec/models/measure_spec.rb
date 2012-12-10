@@ -260,5 +260,8 @@ describe Measure do
       end
     end
     
+    context "add a chord and note to a measure" do
+      
+    end
   end
 end
