@@ -260,7 +260,20 @@ describe Measure do
       end
     end
     
-    context "add a chord and note to a measure" do
+    context "add a chord and melody note to a measure" do
+      it "should add a chord with melody note of E" do
+        pending
+        @measure.add_to_measure(:chord=>@g_chord, :melody=>"E")
+        
+        @measure.positions.size.should == 1
+  	    @measure.positions.first.should == "1.0"
+  	    
+	      @measure.notes_by_position["1.0"][0].note.name.should == "G"
+	      @measure.notes_by_position["1.0"][1].note.name.should == "B"
+	      @measure.notes_by_position["1.0"][2].note.name.should == "D"
+	      @measure.notes_by_position["1.0"][3].note.name.should == "Gb"
+	      @measure.notes_by_position["1.0"][3].note.name.should == "E"
+      end
       
     end
   end

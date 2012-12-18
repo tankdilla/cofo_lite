@@ -17,12 +17,10 @@ CofoLite::Application.routes.draw do
     get 'clear'
     get 'play'
     
-    resources :measure_notes do
-      
-    end
-    
     resources :measures do
-      
+      resources :measure_notes do
+        
+      end
     end
   end
   

@@ -59,10 +59,17 @@ class Chord < ActiveRecord::Base
   
   class << self
     def create_chord(chord_options)
+      exclude_fifth = chord_options[:exclude_fifth] || false
       
       if chord_options[:base_note]
         
         base_note = chord_options[:base_note]
+        
+        if chord_options[:melody_note] && chord_options[:melody_note].is_a?(String)
+          melody_note = Note.where(name: chord_options[:melody_note]).first
+        else
+          melody_note = nil
+        end
         
         if chord_options[:chord_name]
           #if a chord name, ie major, minor, diminished is specified, find the notes based on the chord table
@@ -78,7 +85,14 @@ class Chord < ActiveRecord::Base
           
           if chord
             chord.chord_definitions.each do |d|
-              chord_array << scale.get_note({:scale_number => d.scale_number, :modifier => d.modifier})
+              next if d.scale_number == 5 && exclude_fifth
+              chord_note = scale.get_note({:scale_number => d.scale_number, :modifier => d.modifier})
+              
+              if melody_note
+                next if melody_note.id == chord_note.id
+              end
+              
+              chord_array << chord_note
             end
             
             chord.notes = chord_array
@@ -95,13 +109,23 @@ class Chord < ActiveRecord::Base
           #For now, if the chord letter is passed in, it will just use a simple 1,3,5,7 for whichever mode it's in
           #In the future, i'll implement a chord suggestion function for each chord letter I-VII
           [1, 3, 5, 7].each do |d|
-            chord_array << scale.get_note({:scale_number => d})
+            chord_note = scale.get_note({:scale_number => d})
+            
+            if melody_note
+              next if melody_note.id == chord_note.id
+            end
+            
+            chord_array << chord_note
           end
           
           chord.notes = chord_array
         end
       else
         chord = nil
+      end
+      
+      if melody_note
+        chord.notes << melody_note
       end
       
       chord
