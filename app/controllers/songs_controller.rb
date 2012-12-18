@@ -36,12 +36,20 @@ class SongsController < ApplicationController
   
   def add_to
   	song = Song.find(session[:song])
+  	
     if params[:note]
       song.add_to_song(:note=>Note.find_by_name(params[:note]))
-    elsif params[:chord]
+    elsif params[:chord] ||
+      (params[:chord_note] && params[:chord_name])
       
-      song.add_chord(:chord_string=>params[:chord])
-    elsif params[:chord_note] && params[:chord_name]
+      options = {}
+    	options[:chord_string] = params[:chord]
+    	options[:chord_note] = params[:chord_note]
+    	options[:chord_name] = params[:chord_name]
+    	options[:melody_note] = params[:melody_note]
+      
+      song.add_chord(options)
+    elsif false
       
       song.add_chord(:chord_note=>params[:chord_note], :chord_name=>params[:chord_name])
     elsif params[:progression]

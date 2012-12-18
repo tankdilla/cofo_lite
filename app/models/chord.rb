@@ -131,22 +131,22 @@ class Chord < ActiveRecord::Base
       chord
     end
   
-    def formatted_chord(options)
-      chord_object = nil
+    def formatted_chord(p_options)
+      options = {}
       
-      if options[:chord_string]
-        chord_params = options[:chord_string].split(',')
-        chord_note = chord_params[0]
-        chord_number = chord_params[1]
-        chord_symbol = ChordSymbol.find(chord_number.to_i)
-        chord_object = Chord.create_chord({:base_note=>chord_note, :chord_letter=>chord_symbol.name})
-      elsif options[:chord_name] && options[:chord_note]
-        chord_note = options[:chord_note]
-        chord_name = options[:chord_name]
-        chord_object = Chord.create_chord({:base_note=>chord_note, :chord_name=>chord_name})
+      if p_options[:chord_string]
+        chord_params = p_options[:chord_string].split(',')
+        chord_symbol = ChordSymbol.find(chord_params[1].to_i)
+        options[:base_note] = chord_params[0]
+        options[:chord_letter] = chord_symbol.name
+      elsif p_options[:chord_name] && p_options[:chord_note]
+        options[:base_note] = p_options[:chord_note]
+        options[:chord_name] = p_options[:chord_name]
       end
       
-      chord_object
+      options[:melody_note] = p_options[:melody_note]
+      
+      Chord.create_chord(options)
     end
   end
 end

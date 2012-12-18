@@ -68,6 +68,12 @@
   = submit_tag 'Add chord by name'
 %p
 = form_tag(song_add_to_path(@song)) do
+  = select_tag(:chord_note, options_from_collection_for_select(@notes, :name, :name))
+  = select_tag(:chord_name, options_from_collection_for_select(@chord_names, :name, :name))
+  = select_tag(:melody_note, options_from_collection_for_select(@notes, :name, :name))
+  = submit_tag 'Add chord by name with melody note'
+%p
+= form_tag(song_add_to_path(@song)) do
   = select_tag(:progression, options_from_collection_for_select(@progressions, :id, :name))
   = submit_tag 'Add progression'
 
