@@ -7,6 +7,10 @@ class Chord < ActiveRecord::Base
     @notes.collect{|n| n.name}
   end
   
+  def description
+    "#{root_note}#{abbrev}"
+  end
+  
   def invert(inversion_number)
     #inversion number should be 0, 1, 2, or 3
     self.notes.rotate(inversion_number)
@@ -78,7 +82,8 @@ class Chord < ActiveRecord::Base
           chord_type = chord_options[:chord_name]
           
           chord = Chord.find_by_name(chord_type)
-          chord.chord_name = "#{base_note} #{chord_type}"
+          chord.root_note = base_note
+          #chord.chord_name = "#{base_note} #{chord_type}"
           
           scale = Scale.create_scale(base_note)
           chord_array = Array.new
@@ -102,8 +107,19 @@ class Chord < ActiveRecord::Base
           
         elsif chord_options[:chord_letter]
           scale = Scale.create_scale(base_note, chord_options[:chord_letter])
-          chord = Chord.new
-          chord.chord_name = "#{base_note} #{chord_options[:chord_letter]}"
+          
+          chord = 
+            case chord_options[:chord_letter]
+            when "I", "IV","V"
+              Chord.where(name: "major 7").first
+            when "II", "III", "VI"
+              Chord.where(name: "minor 7").first
+            when "VII"
+              Chord.where(name: "diminished 7").first
+            end
+            
+          #chord.root_note = "#{base_note} #{chord_options[:chord_letter]}"
+          chord.root_note = base_note
           chord_array = Array.new
           
           #For now, if the chord letter is passed in, it will just use a simple 1,3,5,7 for whichever mode it's in
@@ -147,6 +163,18 @@ class Chord < ActiveRecord::Base
       options[:melody_note] = p_options[:melody_note]
       
       Chord.create_chord(options)
+    end
+    
+    def possible_chords(melody_note, scale_key)
+      scale = Scale.create_scale(scale_key)
+      #for now, possible chords for a melody and scale key will only be based on the notes within the scale key
+      if scale.scale_note_names.include?(melody_note)
+        scale_chords = scale.scale_notes.collect{|n| Chord.formatted_chord(:chord_string=>n.description)}
+        possible_chords = scale_chords.select{|c| c.show_notes.include?(melody_note)}
+        
+      else
+        []
+      end
     end
   end
 end

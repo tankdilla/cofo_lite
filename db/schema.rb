@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125230614) do
+ActiveRecord::Schema.define(:version => 20121220225044) do
 
   create_table "chord_definitions", :force => true do |t|
     t.integer  "chord_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121125230614) do
     t.integer  "sort_order"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "interval_id"
   end
 
   create_table "chord_symbols", :force => true do |t|

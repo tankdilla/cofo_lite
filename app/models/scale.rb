@@ -8,9 +8,13 @@ class Scale
     #  Scale.create_scale(key)
     #end
   end
+  
+  def scale_note_names
+    scale_notes.collect(&:name)
+  end
 
   def note_position(letter)
-    scale_notes.collect(&:name).index(letter)+1
+    scale_note_names.index(letter)+1
   end
   
   def get_note(options)
