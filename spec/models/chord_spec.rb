@@ -78,4 +78,10 @@ describe Chord do
       chord.notes[2].name.should == "E"
     end
   end
+  
+  context "chord suggestions given melody note and song key" do
+    it "should suggest C major, F major, and A minor given melody note C and the key of C" do
+      
+    end
+  end
 end
