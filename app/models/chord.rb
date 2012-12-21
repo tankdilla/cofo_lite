@@ -12,7 +12,7 @@ class Chord < ActiveRecord::Base
   end
   
   def short_description
-    "#{root_note}#{abbrev_2}"
+    "#{root_note}#{abbrev_2 || abbrev}"
   end
   
   def invert(inversion_number)
