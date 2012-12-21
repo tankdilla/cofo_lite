@@ -11,6 +11,10 @@ class Chord < ActiveRecord::Base
     "#{root_note}#{abbrev}"
   end
   
+  def short_description
+    "#{root_note}#{abbrev_2}"
+  end
+  
   def invert(inversion_number)
     #inversion number should be 0, 1, 2, or 3
     self.notes.rotate(inversion_number)
@@ -169,7 +173,10 @@ class Chord < ActiveRecord::Base
       Chord.create_chord(options)
     end
     
-    def possible_chords(melody_note, scale_key)
+    def possible_chords(options)
+      melody_note = options[:melody_note]
+      scale_key = options[:scale_key]
+      
       scale = Scale.create_scale(scale_key)
       #for now, possible chords for a melody and scale key will only be based on the notes within the scale key
       if scale.scale_note_names.include?(melody_note)

@@ -16,7 +16,7 @@ describe Chord do
     
     it 'should have a description of C major' do
       chord = Chord.create_chord({:base_note => "C", :chord_name => "major"})
-      chord.chord_name.should == "Cmaj"
+      chord.description.should == "Cmaj"
     end
     
     it 'should create a F minor chord with the notes F, Ab, and C' do
@@ -81,12 +81,21 @@ describe Chord do
   
   context "chord suggestions given melody note and song key" do
     it "should suggest C major, D minor F major, and A minor given melody note C and the key of C" do
-      chords = Chord.possible_chords("C", "C")
+      chords = Chord.possible_chords(:melody_note=>"C", :scale_key=>"C")
       chords.size.should == 4
       chords[0].show_notes.should == %w{C E G B}
       chords[1].show_notes.should == %w{D F A C}
       chords[2].show_notes.should == %w{F A C E}
       chords[3].show_notes.should == %w{A C E G}
+    end
+  end
+  
+  context "suggest chords based on notes given" do
+    it "should suggest an Fmaj given the notes F A C E" do
+      notes = %w{F A C E}
+      possible_chords = Chord.name_by_notes(notes)
+      possible_chords.size.should == 1
+      possible_chords[0].description.should == "Fmaj7"
     end
   end
 end

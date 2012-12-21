@@ -1,0 +1,9 @@
+%table.display_notes
+  - @song.measures.each do |measure|
+    - measure.positions.each do |pos|
+      %td(valign="top")
+        %table
+          - measure.notes_by_position[pos].reverse.each do |measure_note|
+            %tr
+              %td
+                = measure_note.name  
