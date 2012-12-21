@@ -61,6 +61,10 @@ class Chord < ActiveRecord::Base
     
   end
   
+  def intervals
+    chord_definitions.collect(&:interval_id)
+  end
+  
   class << self
     def create_chord(chord_options)
       exclude_fifth = chord_options[:exclude_fifth] || false
@@ -175,6 +179,22 @@ class Chord < ActiveRecord::Base
       else
         []
       end
+    end
+    
+    def name_by_notes(notes_array)
+      chord_key = notes_array[0]
+      chord_key_scale = Scale.create_scale(chord_key, "all")
+      chord_key_scale_notes  = chord_key_scale.scale_notes.collect(&:name)
+      
+      note_positions = notes_array.collect{|n| chord_key_scale_notes.index(n)+1}
+      
+      possible_chords = Chord.all.collect(&:id)
+      note_positions.each do |position|
+        possible_chords = ChordDefinition.where(interval_id: position).where(chord_id: possible_chords).collect(&:chord_id)
+      end
+      
+      possible_chords = Chord.where(id: possible_chords).select{|c| c.intervals == note_positions}
+      possible_chords.each{|c| c.root_note = chord_key}
     end
   end
 end

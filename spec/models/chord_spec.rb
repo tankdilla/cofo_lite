@@ -16,7 +16,7 @@ describe Chord do
     
     it 'should have a description of C major' do
       chord = Chord.create_chord({:base_note => "C", :chord_name => "major"})
-      chord.chord_name.should == "C major"
+      chord.chord_name.should == "Cmaj"
     end
     
     it 'should create a F minor chord with the notes F, Ab, and C' do
