@@ -160,6 +160,10 @@ describe Measure do
     	  notes_by_position["4.0"].class.should == Array
     	  notes_by_position["4.0"].size.should == 4    	  
     	end
+
+      it "should suggest an Cmaj given measure notes for a C chord" do
+        @measure.chord_at_position(@measure.positions.first).should == "Cmaj7"
+      end
     end
     
     context "add G chord" do

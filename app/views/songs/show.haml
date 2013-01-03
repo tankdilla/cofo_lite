@@ -1,9 +1,15 @@
 %h3 
   New song in the key of
   = @key
-
 %p
-  Scale notes and numbes
+  = form_tag(song_path(@song), :method=>:get) do
+    = radio_button_tag('note_style', 'all_notes', session[:note_style]=='all_notes')
+    All Notes
+    = radio_button_tag('note_style', 'lead_sheet', session[:note_style]=='lead_sheet')
+    Lead Sheet
+    = submit_tag 'Switch', {class: 'btn btn-mini'}
+%p
+  Scale notes and numbers
 %p
   %table
     %tr
@@ -18,7 +24,10 @@
                 = index+1
             
 
-= render :partial=>'lead_sheet_style'
+-if session[:note_style] == 'all_notes'
+  = render :partial=>'all_notes'
+-else
+  = render :partial=>'lead_sheet_style'
 
 %br
 = link_to 'Play', song_play_path(@song)

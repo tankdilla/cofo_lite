@@ -1,6 +1,6 @@
 class Measure < ActiveRecord::Base
   belongs_to :song, :dependent=>:destroy
-  has_many :measure_notes, :order=>'octave_number asc, sort_order asc' #, note_id asc'
+  has_many :measure_notes, :order=>'octave_number asc'#, sort_order asc' #, note_id asc'
 #  after_initialize :set_measure
   
   @@default_octave_number = 4
@@ -144,16 +144,18 @@ class Measure < ActiveRecord::Base
     
     note_hash
   end
+
+  def chords_at(position)
+    Chord.name_by_notes(notes_by_position[position])
+  end
   
-  def chord_at_position(notes)
-    notes = notes.collect do |n|
-      if n.kind_of?(MeasureNote)
-        n.note.name
-      elsif n.kind_of?(Note)
-        n.name
-      end
+  def chord_at_position(position)
+    chord = chords_at(position)
+    unless chord.blank?
+      chord.first.description
+    else
+      nil
     end
-    Chord.name_by_notes(notes)
   end
   
   def melody_note(position)

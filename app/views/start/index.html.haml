@@ -7,7 +7,7 @@
 %p To begin, select a key (scale) to start in
 
 = form_tag(songs_path, :method=>:post) do
-  = select_tag(:key, options_from_collection_for_select(@notes, :name, :name))
+  = select_tag(:key, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'})
   
   = submit_tag "Select", :name=>nil
 

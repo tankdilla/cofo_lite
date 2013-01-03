@@ -97,5 +97,6 @@ describe Chord do
       possible_chords.size.should == 1
       possible_chords[0].description.should == "Fmaj7"
     end
+
   end
 end

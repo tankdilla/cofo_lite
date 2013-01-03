@@ -9,7 +9,7 @@
               %td
                 = measure_note.name    
               = form_for :measure_note, :url=>song_measure_measure_note_path(@song, measure, measure_note), :html=>{:method=>:put} do
-                %td
+                %td{:hidden=>true}
                   = render :partial=>'songs/note_select', :locals=>{:notes=>@notes}
                   = select_tag :octave, options_for_select( (1..6).collect{|n| [n, n]} ), {class: 'span1'}
                   = submit_tag 'add', { class: 'btn btn-mini' }

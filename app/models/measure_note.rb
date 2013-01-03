@@ -12,6 +12,10 @@ class MeasureNote < ActiveRecord::Base
 	def name
 	  note.name + octave_number.to_s
 	end
+
+  def note_name
+    note.name
+  end
 	
 	def invert(direction)
 	  if direction == "up"

@@ -8,16 +8,16 @@
 Note.delete_all
 
 Note.create(:name=>"C", :sort_order=>1)
-Note.create(:name=>"Db", :sort_order=>2)
+Note.create(:name=>"Db", :alt_name=>"C#", :sort_order=>2)
 Note.create(:name=>"D", :sort_order=>3)
-Note.create(:name=>"Eb", :sort_order=>4)
+Note.create(:name=>"Eb", :alt_name=>"D#", :sort_order=>4)
 Note.create(:name=>"E", :sort_order=>5)
 Note.create(:name=>"F", :sort_order=>6)
-Note.create(:name=>"Gb", :sort_order=>7)
+Note.create(:name=>"Gb", :alt_name=>"F#", :sort_order=>7)
 Note.create(:name=>"G", :sort_order=>8)
-Note.create(:name=>"Ab", :sort_order=>9)
+Note.create(:name=>"Ab", :alt_name=>"G#", :sort_order=>9)
 Note.create(:name=>"A", :sort_order=>10)
-Note.create(:name=>"Bb", :sort_order=>11)
+Note.create(:name=>"Bb", :alt_name=>"A#", :sort_order=>11)
 Note.create(:name=>"B", :sort_order=>12)
 
 Interval.delete_all

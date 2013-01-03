@@ -26,4 +26,18 @@ class Note < ActiveRecord::Base
     
     order
   end
+
+  class << self
+    def simple_notes(notes_array)
+      notes_array.collect do |n|
+        if n.kind_of?(MeasureNote)
+          n.note_name
+        elsif n.kind_of?(Note)
+          n.name
+        elsif n.kind_of?(String)
+          n
+        end
+      end
+    end
+  end
 end

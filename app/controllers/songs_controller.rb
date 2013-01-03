@@ -11,6 +11,12 @@ class SongsController < ApplicationController
       session[:song] ||= Song.create!({:note_id=>Note.find_by_name(session[:song_key])}).id
     end
     
+    unless params[:note_style]
+      session[:note_style] ||= 'lead_sheet'
+    else
+      session[:note_style] = params[:note_style]
+    end
+
     @song_chords = session[:song_chords]
     @song = Song.find(session[:song])
     

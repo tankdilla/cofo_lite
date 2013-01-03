@@ -118,10 +118,12 @@ class Chord < ActiveRecord::Base
           
           chord = 
             case chord_options[:chord_letter]
-            when "I", "IV","V"
+            when "I", "IV"
               Chord.where(name: "major 7").first
             when "II", "III", "VI"
               Chord.where(name: "minor 7").first
+            when "V"
+              Chord.where(name: "dominant 7").first
             when "VII"
               Chord.where(name: "diminished 7").first
             end
@@ -189,11 +191,13 @@ class Chord < ActiveRecord::Base
     end
     
     def name_by_notes(notes_array)
-      chord_key = notes_array[0]
+      simple_notes_array = Note.simple_notes(notes_array)
+
+      chord_key = simple_notes_array.first
       chord_key_scale = Scale.create_scale(chord_key, "all")
       chord_key_scale_notes  = chord_key_scale.scale_notes.collect(&:name)
       
-      note_positions = notes_array.collect{|n| chord_key_scale_notes.index(n)+1}
+      note_positions = simple_notes_array.collect{|n| chord_key_scale_notes.index(n)+1}
       
       possible_chords = Chord.all.collect(&:id)
       note_positions.each do |position|
@@ -203,5 +207,7 @@ class Chord < ActiveRecord::Base
       possible_chords = Chord.where(id: possible_chords).select{|c| c.intervals == note_positions}
       possible_chords.each{|c| c.root_note = chord_key}
     end
+
+    
   end
 end
