@@ -65,6 +65,14 @@ class Scale
     
     order
   end
+
+  def chords_for_melody_note(melody_note)
+    chords_for_scale_notes.select{|chord| chord.show_notes.include?(melody_note)}
+  end
+
+  def chords_for_scale_notes
+    @chords_for_scale_notes ||= scale_notes.collect{|scale_note| Chord.formatted_chord(:chord_string=>scale_note.description)}    
+  end
   
   class << self
     def create_scale(key, mode_string="I")
