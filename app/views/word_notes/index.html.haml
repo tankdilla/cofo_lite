@@ -1,0 +1,23 @@
+%h1 Listing word_notes
+
+%table
+  %tr
+    %th Verse
+    %th Line position
+    %th Note number
+    %th
+    %th
+    %th
+
+  - @word_notes.each do |word_note|
+    %tr
+      %td= word_note.verse_id
+      %td= word_note.line_position
+      %td= word_note.note_number
+      %td= link_to 'Show', word_note
+      %td= link_to 'Edit', edit_word_note_path(word_note)
+      %td= link_to 'Destroy', word_note, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Word note', new_word_note_path

@@ -1,0 +1,23 @@
+%h1 Listing verses
+
+%table
+  %tr
+    %th Song
+    %th Line number
+    %th Words
+    %th
+    %th
+    %th
+
+  - @verses.each do |verse|
+    %tr
+      %td= verse.song_id
+      %td= verse.line_number
+      %td= verse.words
+      %td= link_to 'Show', verse
+      %td= link_to 'Edit', edit_verse_path(verse)
+      %td= link_to 'Destroy', verse, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Verse', new_verse_path

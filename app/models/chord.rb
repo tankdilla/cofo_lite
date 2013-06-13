@@ -4,7 +4,7 @@ class Chord < ActiveRecord::Base
   attr_accessor :chord_name, :notes, :root_note
   
   def show_notes
-    @notes.collect{|n| n.name}
+    @notes.collect(&:name)
   end
   
   def description
@@ -206,6 +206,10 @@ class Chord < ActiveRecord::Base
       
       possible_chords = Chord.where(id: possible_chords).select{|c| c.intervals == note_positions}
       possible_chords.each{|c| c.root_note = chord_key}
+    end
+
+    def chords_for_melody(melody_note, scale_note)
+      
     end
 
     

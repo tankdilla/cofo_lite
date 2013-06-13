@@ -4,7 +4,11 @@
 
 %p This app will let you experiment with creating music by giving you a selection of notes, chords, and progressions that serve as the building blocks of any and every song.
 
-%p To begin, select a key (scale) to start in
+%p 
+  To begin, 
+  = link_to 'view song lyrics', song_names_path
+
+%p Or create a song. Select a key (scale) to start in
 
 = form_tag(songs_path, :method=>:post) do
   = select_tag(:key, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'})

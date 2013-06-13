@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Verse:
+  = @word_note.verse_id
+%p
+  %b Line position:
+  = @word_note.line_position
+%p
+  %b Note number:
+  = @word_note.note_number
+
+= link_to 'Edit', edit_word_note_path(@word_note)
+\|
+= link_to 'Back', word_notes_path

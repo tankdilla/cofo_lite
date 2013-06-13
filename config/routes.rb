@@ -1,4 +1,14 @@
 CofoLite::Application.routes.draw do
+  resources :song_names do
+    get 'edit_verses'
+    post 'update_verses'
+
+    resources :verses do
+      resources :word_notes
+    end
+
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

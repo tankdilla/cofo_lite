@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220225044) do
+ActiveRecord::Schema.define(:version => 20130613023011) do
 
   create_table "chord_definitions", :force => true do |t|
     t.integer  "chord_id"
@@ -114,6 +114,14 @@ ActiveRecord::Schema.define(:version => 20121220225044) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "song_names", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "song_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "songs", :force => true do |t|
     t.integer  "note_id"
     t.datetime "created_at",     :null => false
@@ -121,6 +129,23 @@ ActiveRecord::Schema.define(:version => 20121220225044) do
     t.string   "description"
     t.string   "tempo"
     t.string   "time_signature"
+  end
+
+  create_table "verses", :force => true do |t|
+    t.integer  "song_id"
+    t.integer  "line_number"
+    t.string   "words"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "song_name_id"
+  end
+
+  create_table "word_notes", :force => true do |t|
+    t.integer  "verse_id"
+    t.integer  "line_position"
+    t.integer  "note_number"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

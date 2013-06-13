@@ -85,4 +85,13 @@ class SongsController < ApplicationController
     redirect_to song_path(song)
   end
 
+  def verses
+    song = Song.find(session[:song])
+    verses = song.verses
+  end
+
+  def edit_verses
+    
+  end
+
 end

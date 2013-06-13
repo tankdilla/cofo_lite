@@ -1,0 +1,19 @@
+= form_for @word_note do |f|
+  - if @word_note.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@word_note.errors.count, "error")} prohibited this word_note from being saved:"
+      %ul
+        - @word_note.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :verse_id
+    = f.number_field :verse_id
+  .field
+    = f.label :line_position
+    = f.number_field :line_position
+  .field
+    = f.label :note_number
+    = f.number_field :note_number
+  .actions
+    = f.submit 'Save'

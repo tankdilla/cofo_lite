@@ -1,0 +1,8 @@
+%p
+  %b Title:
+  = @song_name.title
+
+= form_for song_name_update_verses_path(@song_name) do |f|
+  = f.text_area :verses
+
+  = submit_tag 'Submit'

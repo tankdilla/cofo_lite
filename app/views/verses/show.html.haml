@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Song:
+  = @verse.song_id
+%p
+  %b Line number:
+  = @verse.line_number
+%p
+  %b Words:
+  = @verse.words
+
+= link_to 'Edit', edit_verse_path(@verse)
+\|
+= link_to 'Back', verses_path
