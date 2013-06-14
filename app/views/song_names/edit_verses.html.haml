@@ -1,8 +1,12 @@
 %p
-  %b Title:
+  %b Enter lyrics for :
   = @song_name.title
 
-= form_for song_name_update_verses_path(@song_name) do |f|
-  = f.text_area :verses
+#verses
+  = render 'verses/show_verses', verses: @song_name.verses
 
-  = submit_tag 'Submit'
+#add_verse
+  = render 'verses/form'
+
+%p
+  = link_to 'Done', song_name_path(@song_name)

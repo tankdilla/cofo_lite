@@ -85,10 +85,41 @@ class SongNamesController < ApplicationController
 
   def edit_verses
     @song_name = SongName.find(params[:song_name_id])
-    @verses = @song_name.verses.map(&:words).join(' / ')
+    @verses = @song_name.verses
+    @verse = Verse.new
+    @edit = true
   end
 
   def update_verses
-    
+    @song_name = SongName.find(params[:song_name_id])
+
+    unless params[:delete]
+      verse = Verse.new(params[:verse])
+      @song_name.verses << verse  
+    else
+      verse = Verse.find(params[:id])
+      verse.destroy
+    end
+
+    respond_to { |format|
+      format.html { redirect_to song_name_edit_verses_url(@song_name) }
+      format.js { @edit = true }
+    }
+  end
+
+  def delete_verse
+    @song_name = SongName.find(params[:song_name_id])
+
+    verse = Verse.find(params[:verse_id])
+    verse.destroy
+
+    respond_to { |format|
+      format.html { redirect_to song_name_edit_verses_url(@song_name) }
+      format.js { 
+        @edit = true
+        @verse = Verse.new
+        render 'update_verses'
+      }
+    }
   end
 end

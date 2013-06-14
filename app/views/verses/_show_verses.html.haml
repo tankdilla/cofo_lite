@@ -1,0 +1,6 @@
+- unless verses.empty?
+  - verses.each do |verse|
+    %p
+      = verse.words
+      - if @edit
+        = link_to '-', song_name_delete_verse_path(verse.song_name_id, verse_id: verse, delete: true), remote: true

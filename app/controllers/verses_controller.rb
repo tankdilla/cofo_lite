@@ -72,11 +72,11 @@ class VersesController < ApplicationController
   # DELETE /verses/1
   # DELETE /verses/1.json
   def destroy
-    @verse = Verse.find(params[:id])
-    @verse.destroy
+    @song_name = SongName.find(params[:song_name_id])
 
     respond_to do |format|
       format.html { redirect_to verses_url }
+      format.js {}
       format.json { head :no_content }
     end
   end

@@ -1,19 +1,4 @@
-= form_for @verse do |f|
-  - if @verse.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@verse.errors.count, "error")} prohibited this verse from being saved:"
-      %ul
-        - @verse.errors.full_messages.each do |msg|
-          %li= msg
+= form_for :verse, url: song_name_update_verses_path(@song_name), remote: true do |f|
+  = f.text_field :words, id: 'words_field'
 
-  .field
-    = f.label :song_id
-    = f.number_field :song_id
-  .field
-    = f.label :line_number
-    = f.number_field :line_number
-  .field
-    = f.label :words
-    = f.text_field :words
-  .actions
-    = f.submit 'Save'
+  = f.submit '+'

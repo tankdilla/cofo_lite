@@ -3,6 +3,7 @@
 %p
   %b Title:
   = @song_name.title
+
 %p
   %b Description:
   = @song_name.description
@@ -11,6 +12,11 @@
   %p
     %b Song:
     = @song_name.song_id
+
+%p
+  %b Lyrics:
+#verses
+  = render 'verses', verses: @song_name.verses
 
 %p
   = link_to 'Edit Song Lyrics', song_name_edit_verses_path(@song_name)
