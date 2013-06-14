@@ -76,7 +76,7 @@ class VersesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to verses_url }
-      format.js {}
+      format.js
       format.json { head :no_content }
     end
   end
