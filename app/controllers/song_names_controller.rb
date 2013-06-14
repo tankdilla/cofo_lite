@@ -96,9 +96,6 @@ class SongNamesController < ApplicationController
     unless params[:delete]
       verse = Verse.new(params[:verse])
       @song_name.verses << verse  
-    else
-      verse = Verse.find(params[:id])
-      verse.destroy
     end
 
     respond_to { |format|
