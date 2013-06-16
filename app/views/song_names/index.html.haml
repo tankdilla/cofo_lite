@@ -11,12 +11,9 @@
 
   - @song_names.each do |song_name|
     %tr
-      %td= song_name.title
+      %td= link_to song_name.title, song_name
       %td= song_name.description
       %td= song_name.song_id
-      %td= link_to 'Show', song_name
-      %td= link_to 'Edit', edit_song_name_path(song_name)
-      %td= link_to 'Destroy', song_name, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

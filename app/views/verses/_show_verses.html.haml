@@ -1,6 +1,28 @@
 - unless verses.empty?
-  - verses.each do |verse|
-    %p
-      = verse.words
-      - if @edit
-        = link_to '-', song_name_delete_verse_path(verse.song_name_id, verse_id: verse, delete: true), remote: true
+  %table
+    - verses.each do |verse|
+      %tr
+        - verse.words.split(" ").each_with_index do |word, index|
+          %td
+            %table{width: '100%'}
+              %tr
+                %td{id: "#{verse.id}_#{index}", align: 'center'}
+                  - if verse.word_notes.present? && verse.word_notes.select{|note| note.line_position == index}.first
+                    = verse.word_notes.select{|note| note.line_position == index}.first.note_number
+                  - else
+                    - if @edit
+                      = link_to '+', song_name_edit_song_note_path(verse.song_name_id, 
+                          edit_index: index, verse_id: verse, edit_note: true), remote: true
+                    - else
+                      &nbsp;
+              %tr
+                %td{align: 'center'}
+                  = word
+        %td
+          %table
+            %tr
+              %td
+                - if @edit
+                  = link_to '-', song_name_delete_verse_path(verse.song_name_id, verse_id: verse, delete: true), remote: true
+            %tr
+              %td &nbsp;

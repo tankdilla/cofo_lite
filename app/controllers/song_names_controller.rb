@@ -90,7 +90,7 @@ class SongNamesController < ApplicationController
     @edit = true
   end
 
-  def update_verses
+  def update_verse
     @song_name = SongName.find(params[:song_name_id])
 
     unless params[:delete]
@@ -115,7 +115,33 @@ class SongNamesController < ApplicationController
       format.js { 
         @edit = true
         @verse = Verse.new
-        render 'update_verses'
+        render 'update_verse'
+      }
+    }
+  end
+
+  def edit_song_note
+    @song_name = SongName.find(params[:song_name_id])
+    @edit_index = params[:edit_index]
+    @verse_id = params[:verse_id]
+
+    respond_to { |format|
+      format.js {
+        @edit = params[:edit_note]
+        @tag = "##{@verse_id}_#{@edit_index}"
+      }
+    }
+  end
+
+  def add_song_note
+    @song_name = SongName.find(params[:song_name_id])
+    WordNote.create!(params[:word_note])
+    # redirect_to song_name_edit_verses_url(@song_name)
+    respond_to { |format|
+      format.js {
+        @edit = true
+        @verse = Verse.new
+        render 'update_verse'
       }
     }
   end

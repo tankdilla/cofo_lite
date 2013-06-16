@@ -1,4 +1,4 @@
-= form_for :verse, url: song_name_update_verses_path(@song_name), remote: true do |f|
+= form_for :verse, url: song_name_update_verse_path(@song_name), remote: true do |f|
   = f.text_field :words, id: 'words_field'
 
   = f.submit '+'

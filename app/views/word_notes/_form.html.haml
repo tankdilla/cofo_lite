@@ -1,19 +1,7 @@
-= form_for @word_note do |f|
-  - if @word_note.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@word_note.errors.count, "error")} prohibited this word_note from being saved:"
-      %ul
-        - @word_note.errors.full_messages.each do |msg|
-          %li= msg
+= form_for :word_note, url: song_name_add_song_note_path(@song_name), remote: true do |f|
+  = f.text_field :note_number, class: 'span-smalltext', id: 'note_number_field'
+  = f.hidden_field :line_position, {value: index}
+  = f.hidden_field :verse_id, {value: verse_id}
 
-  .field
-    = f.label :verse_id
-    = f.number_field :verse_id
-  .field
-    = f.label :line_position
-    = f.number_field :line_position
-  .field
-    = f.label :note_number
-    = f.number_field :note_number
-  .actions
-    = f.submit 'Save'
+  = f.submit '+'
+= link_to 'cancel', song_name_edit_song_note_path(@song_name.id, edit_index: index, verse_id: verse_id, edit_note: false), remote: true

@@ -3,7 +3,7 @@
   = @song_name.title
 
 #verses
-  = render 'verses/show_verses', verses: @song_name.verses
+  = render 'verses/show_verses', verses: @song_name.verses, song_notes: @song_notes
 
 #add_verse
   = render 'verses/form'
