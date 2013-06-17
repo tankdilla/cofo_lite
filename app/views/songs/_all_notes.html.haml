@@ -7,53 +7,13 @@
           - measure.notes_by_position[pos].reverse.each do |measure_note|
             %tr
               %td
-                = measure_note.name    
-              = form_for :measure_note, :url=>song_measure_measure_note_path(@song, measure, measure_note), :html=>{:method=>:put} do
-                %td{:hidden=>true}
-                  = render :partial=>'songs/note_select', :locals=>{:notes=>@notes}
-                  = select_tag :octave, options_for_select( (1..6).collect{|n| [n, n]} ), {class: 'span1'}
-                  = submit_tag 'add', { class: 'btn btn-mini' }
-                  = submit_tag 'clear', { class: 'btn btn-mini' }
-                  = submit_tag 'invert up', { class: 'btn btn-mini' }
-                  = submit_tag 'invert down', { class: 'btn btn-mini' }
+                = measure_note.name
+              /= render :partial => 'edit_measure_note', locals: {song: @song, measure: measure, measure_note: measure_note, notes: @notes}
 
-          = form_for :measure, :url=>song_measure_path(@song, measure, {:position=>pos}), :html=>{:method=>:put} do
-            %tr
-              %td{:colspan=>2}
-                = submit_tag 'clear', { class: 'btn btn-mini' }
-            %tr
-              %td{:colspan=>2}
-                = submit_tag 'invert up', { class: 'btn btn-mini' }
-            %tr
-              %td{:colspan=>2}
-                = submit_tag 'invert down', { class: 'btn btn-mini' }
-            %tr
-              %td{:colspan=>2}
-                = submit_tag 'replace with chord', { class: 'btn btn-mini' }
-                = select_tag :chord_note, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'}
-                = select_tag :chord_name, options_from_collection_for_select(@chord_names, :name, :name), {class: 'span1'}
-  
-%p
-= form_tag(song_add_to_path(@song)) do
-  = render :partial => 'note_select', :locals=>{:notes=>@notes}
-  = submit_tag 'Add note', {class: 'btn btn-mini'}
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :chord, options_from_collection_for_select(@notes, :description, :description), {class: 'span2'}
-  = submit_tag 'Add chord by number', { class: 'btn btn-mini' }
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :chord_note, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'}
-  = select_tag :chord_name, options_from_collection_for_select(@chord_names, :name, :name), {class: 'span1'}
-  = submit_tag 'Add chord by name', { class: 'btn btn-mini' }
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :chord_note, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'}
-  = select_tag :chord_name, options_from_collection_for_select(@chord_names, :name, :name), {class: 'span1'}
-  with melody note 
-  = select_tag :melody_note, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'}
-  = submit_tag 'Add chord by name with melody note', { class: 'btn btn-mini' }
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :progression, options_from_collection_for_select(@progressions, :id, :name), {class: 'span2'}
-  = submit_tag 'Add progression', { class: 'btn btn-mini' }
+          %tr
+            %td
+              = link_to 'edit', edit_song_measure_path(@song, measure, position: pos), remote: true
+
+.edit_measure_position
+
+= render 'add_stuff'

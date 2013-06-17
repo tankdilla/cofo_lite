@@ -66,8 +66,13 @@ class Song < ActiveRecord::Base
       
     self.measures.each do |measure|
       measure.positions.each do |pos|
+
         notes = measure.notes_by_position[pos].collect{|n| "#{n.note.name}#{n.octave_number}"}
-        
+        # debugger
+        if notes.first == "rest4"
+          sleep(0.5)
+          next
+        end
         midi.play(notes, 0.5)
       end
     end

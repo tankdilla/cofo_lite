@@ -1,0 +1,5 @@
+<% unless @done %>
+  $('.edit_measure_position').html("<%= escape_javascript render :partial => 'songs/edit_measure_position', locals: {song: @song, measure: @measure, position: @position} %>");
+<% else %>
+  $('.edit_measure_position').html(" ");
+<% end %>

@@ -136,7 +136,7 @@ class SongNamesController < ApplicationController
   def add_song_note
     @song_name = SongName.find(params[:song_name_id])
     WordNote.create!(params[:word_note])
-    # redirect_to song_name_edit_verses_url(@song_name)
+    
     respond_to { |format|
       format.js {
         @edit = true

@@ -1,15 +1,29 @@
 class MeasuresController < ApplicationController
   
   def edit
-    @measure_note = MeasureNote.find(params[:id])
-    setup_edit
+    @song = Song.find params[:song_id]
+    @measure = Measure.find params[:id]
+    @position = params[:position]
+    @done = params[:done]
+
+    setup_song_measure_edit
     
     respond_to do |format|
-      format.html #{ redirect_to store_url }
-      format.js 
-      
+      format.html
+      format.js
     end
   end
+
+  # def edit
+  #   @measure_note = MeasureNote.find(params[:id])
+  #   setup_edit
+    
+  #   respond_to do |format|
+  #     format.html #{ redirect_to store_url }
+  #     format.js 
+      
+  #   end
+  # end
   
   def update
     @measure = Measure.where(id: params[:id]).first

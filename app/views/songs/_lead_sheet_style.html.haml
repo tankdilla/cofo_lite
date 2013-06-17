@@ -21,27 +21,4 @@
         %b
           |
 
-%p
-= form_tag(song_add_to_path(@song)) do
-  = render :partial => 'note_select', :locals=>{:notes=>@notes}
-  = submit_tag 'Add note', {class: 'btn btn-mini'}
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :chord, options_from_collection_for_select(@notes, :description, :description), {class: 'span2'}
-  = submit_tag 'Add chord by number', { class: 'btn btn-mini' }
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :chord_note, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'}
-  = select_tag :chord_name, options_from_collection_for_select(@chord_names, :name, :name), {class: 'span1'}
-  = submit_tag 'Add chord by name', { class: 'btn btn-mini' }
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :chord_note, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'}
-  = select_tag :chord_name, options_from_collection_for_select(@chord_names, :name, :name), {class: 'span1'}
-  with melody note 
-  = select_tag :melody_note, options_from_collection_for_select(@notes, :name, :name), {class: 'span1'}
-  = submit_tag 'Add chord by name with melody note', { class: 'btn btn-mini' }
-%p
-= form_tag(song_add_to_path(@song)) do
-  = select_tag :progression, options_from_collection_for_select(@progressions, :id, :name), {class: 'span2'}
-  = submit_tag 'Add progression', { class: 'btn btn-mini' }
+= render 'add_stuff'

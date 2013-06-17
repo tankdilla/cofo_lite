@@ -1,0 +1,13 @@
+%fieldset
+  %legend Edit Measure
+  %table
+
+    = form_for :measure_note, :url=>song_measure_measure_note_path(song, measure, measure_note), :html=>{:method=>:put} do
+      %td{:hidden=>true}
+        = render :partial=>'songs/note_select', :locals=>{:notes=>notes}
+        = select_tag :octave, options_for_select( (1..6).collect{|n| [n, n]} ), {class: 'span1'}
+        = submit_tag 'add', { class: 'btn btn-mini' }
+        = submit_tag 'clear', { class: 'btn btn-mini' }
+        = submit_tag 'invert up', { class: 'btn btn-mini' }
+        = submit_tag 'invert down', { class: 'btn btn-mini' }
+= link_to 'Done', edit_song_measure_path(song, measure, done: true)

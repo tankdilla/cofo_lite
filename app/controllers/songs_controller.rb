@@ -20,18 +20,21 @@ class SongsController < ApplicationController
     @song_chords = session[:song_chords]
     @song = Song.find(session[:song])
     
-    @chord_names = Chord.all
+    # @chord_names = Chord.all
     
     @key = session[:song_key] = @song.note.name
     
     if session[:scale].nil?
       scale = Scale.create_scale(@key)
+      session[:scale] = scale
     else
       scale = session[:scale]
     end
     
-    @notes = scale.scale_notes
+    # @notes = scale.scale_notes
     @progressions = Progression.all
+
+    setup_song_measure_edit
   end
   
   def create
@@ -82,7 +85,10 @@ class SongsController < ApplicationController
   def play
     song = Song.find(session[:song])
     song.play
-    redirect_to song_path(song)
+
+    respond_to {|format|
+      format.js { redirect_to song_path(song) }
+    }
   end
 
   def verses

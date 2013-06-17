@@ -92,6 +92,9 @@ class Scale
         note = note.next_note(i)
         n += 1
       end
+      
+      scale.scale_notes << ScaleNote.new(:note_id => Note.where(name: "rest").first.id, :scale_number=>99, :scale=>scale, :mode_letter => "")
+
       scale
     end
     

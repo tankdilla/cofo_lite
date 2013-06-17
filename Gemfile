@@ -36,21 +36,15 @@ end
 # Deploy with Capistrano
 # gem 'capistrano'
 
-group :development do
-  gem "debugger"
+group :development, :test do
+  gem "jazz_hands"
   gem "cucumber-rails", :require => false
+  gem "rspec-rails"
 end
 
-group :test do
-  gem "debugger"
-  gem "autotest"
-end
-
-gem "capybara", :group => [:development, :test]
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem 'jquery-rails', '~> 2.3.0'
-gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 gem "factory_girl_rails"
 
 gem 'thin'

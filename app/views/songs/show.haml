@@ -14,6 +14,7 @@
   %table
     %tr
       - @notes.each_with_index do |note, index|
+        - next if note.name == 'rest'
         %td
           %table
             %tr
@@ -30,7 +31,7 @@
   = render :partial=>'lead_sheet_style'
 
 %br
-= link_to 'Play', song_play_path(@song)
+= link_to 'Play', song_play_path(@song), remote: true
 %br
 = link_to 'Restart with a new key', root_path
 %br

@@ -19,6 +19,7 @@ Note.create(:name=>"Ab", :alt_name=>"G#", :sort_order=>9)
 Note.create(:name=>"A", :sort_order=>10)
 Note.create(:name=>"Bb", :alt_name=>"A#", :sort_order=>11)
 Note.create(:name=>"B", :sort_order=>12)
+Note.create(:name=>"rest", :sort_order=>13)
 
 Interval.delete_all
 Interval.create(:name=>"root", :half_step=>0)
