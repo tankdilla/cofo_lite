@@ -15,3 +15,12 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+('.add_note').hover(
+  function () {
+    $(this).show();
+  }, 
+  function () {
+    $(this).hide();
+  }
+);
