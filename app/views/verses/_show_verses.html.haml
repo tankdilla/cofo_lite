@@ -7,14 +7,7 @@
             %table{width: '100%'}
               %tr
                 %td{id: "#{verse.id}_#{index}", align: 'center'}
-                  - if verse.word_notes.present? && verse.word_notes.select{|note| note.line_position == index}.first
-                    = verse.word_notes.select{|note| note.line_position == index}.first.note_number
-                  - else
-                    - if @edit
-                      = link_to '+', song_name_edit_song_note_path(verse.song_name_id, 
-                          edit_index: index, verse_id: verse, edit_note: true), remote: true
-                    - else
-                      &nbsp;
+                  = render 'verses/show_verse_word', verse: verse, index: index
               %tr
                 %td{align: 'center'}
                   = word

@@ -2,5 +2,5 @@
   $("<%= @tag %>").html("<%= escape_javascript render 'word_notes/form', index: @edit_index, verse_id: @verse_id %>");
   $("#note_number_field").focus();
 <% else %>
-  $("<%= @tag %>").html("<%= link_to '+', song_name_edit_song_note_path(@song_name.id, edit_index: @edit_index, verse_id: @verse_id), remote: true %>");
+  $("<%= @tag %>").html("<%= escape_javascript render 'verses/show_verse_word', index: @edit_index, verse: @verse %>");
 <% end %>

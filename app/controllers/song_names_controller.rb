@@ -42,7 +42,9 @@ class SongNamesController < ApplicationController
   # POST /song_names
   # POST /song_names.json
   def create
+    song = Song.create!({:note_id=>Note.find_by_name("C").id})
     @song_name = SongName.new(params[:song_name])
+    @song_name.song_id = song.id
 
     respond_to do |format|
       if @song_name.save
@@ -122,8 +124,9 @@ class SongNamesController < ApplicationController
 
   def edit_song_note
     @song_name = SongName.find(params[:song_name_id])
-    @edit_index = params[:edit_index]
+    @edit_index = params[:edit_index].to_i
     @verse_id = params[:verse_id]
+    @verse = Verse.find @verse_id
 
     respond_to { |format|
       format.js {

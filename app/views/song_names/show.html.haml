@@ -10,8 +10,7 @@
 
 - if @song_name.song_id  
   %p
-    %b Song:
-    = @song_name.song_id
+    %b= link_to "Song", song_path(@song_name.song_id)
 
 %p
   %b Lyrics:

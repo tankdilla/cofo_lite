@@ -30,6 +30,10 @@
 -else
   = render :partial=>'lead_sheet_style'
 
+- if !@song.song_names.blank?
+  - @song.song_names.each do |song_name|
+    %br= link_to "Song name: #{song_name.title}", song_name_path(song_name)
+
 %br
 = link_to 'Play', song_play_path(@song), remote: true
 %br
