@@ -3,10 +3,6 @@ class Scale
   
   def initialize(key="")
     @scale_notes = Array.new
-    
-    #if !key.blank?
-    #  Scale.create_scale(key)
-    #end
   end
   
   def scale_note_names

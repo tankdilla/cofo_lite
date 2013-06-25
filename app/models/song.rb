@@ -1,7 +1,7 @@
 class Song < ActiveRecord::Base
   belongs_to :note
   has_many :measures, :dependent=>:destroy
-  has_many :song_names
+  has_many :song_names, :dependent=>:destroy
   
   before_create :set_default_values
   

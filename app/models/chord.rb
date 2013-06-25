@@ -212,6 +212,34 @@ class Chord < ActiveRecord::Base
       
     end
 
+    def chord_by_scale_and_number(key, number, options={})
+      chord_number = number
+      options[:use_major] ||= true
+
+      if options[:use_major] && [3, 6, 7].include?(number)
+        
+        chord_number =
+          case number
+            when 3 
+              1
+            when 6
+              4
+            when 7
+              5 
+          end
+      end
+
+      scale = Scale.create_scale(key)
+      note = scale.get_note(scale_number: chord_number)
+      formatted = formatted_chord(chord_string: "#{note.name}, #{chord_number}")
+
+      if [3, 6, 7].include? number
+        "#{note.name}#{formatted.abbrev} / #{scale.get_note(scale_number: number)}"
+      else
+        "#{note.name}#{formatted.abbrev}"
+      end
+    end
+
     
   end
 end

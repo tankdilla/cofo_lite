@@ -15,6 +15,8 @@ class SongNamesController < ApplicationController
   def show
     @song_name = SongName.find(params[:id])
 
+    @show_notes = params[:toggle_chords] ? true : false
+
     @verses = @song_name.verses
 
     respond_to do |format|
@@ -27,6 +29,7 @@ class SongNamesController < ApplicationController
   # GET /song_names/new.json
   def new
     @song_name = SongName.new
+    @notes = Note.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,12 +40,13 @@ class SongNamesController < ApplicationController
   # GET /song_names/1/edit
   def edit
     @song_name = SongName.find(params[:id])
+    @notes = Note.all
   end
 
   # POST /song_names
   # POST /song_names.json
   def create
-    song = Song.create!({:note_id=>Note.find_by_name("C").id})
+    song = Song.create!({:note_id=>Note.find_by_name(params[:key]).id})
     @song_name = SongName.new(params[:song_name])
     @song_name.song_id = song.id
 
@@ -64,6 +68,11 @@ class SongNamesController < ApplicationController
 
     respond_to do |format|
       if @song_name.update_attributes(params[:song_name])
+
+        if params[:key]
+          @song_name.song.update_attributes({:note_id=>Note.find_by_name(params[:key]).id})
+        end
+
         format.html { redirect_to @song_name, notice: 'Song name was successfully updated.' }
         format.json { head :no_content }
       else
