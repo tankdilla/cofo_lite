@@ -17,6 +17,8 @@ group :assets do
   
   gem 'bootstrap-sass', '~> 2.2.1.1'
 
+  gem 'bootstrap-x-editable-rails'
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 

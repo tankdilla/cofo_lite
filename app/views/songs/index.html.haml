@@ -1,19 +1,8 @@
-%h1 
+%h3 
   Songs created
 
 %table
   - @songs.each do |song|
     %tr
       %td
-        = link_to song.id, song_url(song)
-      %td
-        = song.time_signature
-      %td
-        = song.tempo
-      %td
-        = song.measures.count
-        measures
-      %td
-        created
-        = song.created_at.strftime("%m/%d/%Y")
-
+        = link_to "Song #{song.id}, key of #{song.note.name} created #{song.created_at.strftime("%m/%d/%Y")}", song_url(song)

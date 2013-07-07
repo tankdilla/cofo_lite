@@ -20,22 +20,6 @@ class Chord < ActiveRecord::Base
     self.notes.rotate(inversion_number)
   end
   
-  def add_7th(modifier)
-    
-  end
-  
-  def add_9th(modifier)
-    
-  end
-  
-  def add_11th(modifier)
-    
-  end
-  
-  def add_13th(modifier)
-    
-  end
-  
   def add_notes(chord_array)
     @notes = chord_array
     @root_note = chord_array[0]

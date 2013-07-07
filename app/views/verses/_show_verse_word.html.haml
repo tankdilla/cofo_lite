@@ -1,5 +1,4 @@
-- if verse.word_notes.present? && verse.word_notes.select{|note| note.line_position == index}.first
-  - note_number = verse.word_notes.select{|note| note.line_position == index}.first.note_number
+- if note_number = verse.get_note_number_at(index)
   - unless @show_notes
     = link_to note_number, song_name_edit_song_note_path(verse.song_name_id, 
           edit_index: index, verse_id: verse, edit_note: true), remote: true
