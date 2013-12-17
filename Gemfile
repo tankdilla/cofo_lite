@@ -33,6 +33,7 @@ group :development, :test do
   gem "jazz_hands"
   gem "cucumber-rails", :require => false
   gem "rspec-rails"
+  # gem "micromidi"
 end
 
 gem "haml", ">= 3.0.0"
@@ -42,5 +43,4 @@ gem "factory_girl_rails"
 
 gem 'thin'
 
-gem "micromidi"
 gem 'devise'
