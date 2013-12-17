@@ -1,11 +1,13 @@
 CofoLite::Application.routes.draw do
+  devise_for :users
+
   resources :song_names do
     get 'edit_verses'
     post 'update_verse'
 
     get 'edit_song_note'
     post 'add_song_note'
-    
+
     get 'delete_verse'
 
     resources :verses do
@@ -31,14 +33,14 @@ CofoLite::Application.routes.draw do
     post 'add_to'
     get 'clear'
     get 'play'
-    
+
     resources :measures do
       resources :measure_notes do
-        
+
       end
     end
   end
-  
+
   # Sample resource route with options:
   #   resources :products do
   #     member do
@@ -75,7 +77,7 @@ CofoLite::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => "start#index"
+  root :to => "song_names#index"
 
   # See how all your routes lay out with "rake routes"
 

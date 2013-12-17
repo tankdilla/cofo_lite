@@ -1,5 +1,6 @@
 <% if @edit == 'true' %>
   $("<%= @tag %>").html("<%= escape_javascript render 'word_notes/form', index: @edit_index, verse_id: @verse_id %>");
+  $("<%= @tag %>").popover('show');
   $("#note_number_field").focus();
 <% else %>
   $("<%= @tag %>").html("<%= escape_javascript render 'verses/show_verse_word', index: @edit_index, verse: @verse %>");

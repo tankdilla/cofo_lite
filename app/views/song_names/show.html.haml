@@ -8,7 +8,7 @@
   %b Song Key:
   = @song_name.song.note.name
 
-- if @song_name.song_id  
+- if false && @song_name.song_id
   %p
     %b= link_to "Song", song_path(@song_name.song_id)
 
@@ -18,16 +18,18 @@
   = render 'verses/show_verses', verses: @song_name.verses, song_notes: @song_notes
 
 %p
-  %ul
-    %li= link_to 'Edit Song Lyrics', song_name_edit_verses_path(@song_name)
+  %ul.nav
+    - if user_signed_in?
+      %li= link_to 'Edit Song Lyrics', song_name_edit_verses_path(@song_name)
     %li
       - if @show_notes
         = link_to 'Show Chord Numbers', song_name_path(@song_name)
       - else
         = link_to 'Show Chords', song_name_path(@song_name, toggle_chords: true)
 
-= link_to 'Edit', edit_song_name_path(@song_name)
-\|
-= link_to 'Delete', @song_name, :method => :delete, :data => { :confirm => 'Are you sure?' }
-\|
+- if user_signed_in?
+  = link_to 'Edit', edit_song_name_path(@song_name)
+  \|
+  = link_to 'Delete', @song_name, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  \|
 = link_to 'Song List', song_names_path
