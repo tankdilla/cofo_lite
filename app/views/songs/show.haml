@@ -8,7 +8,7 @@
     = radio_button_tag('note_style', 'lead_sheet', session[:note_style]=='lead_sheet')
     Lead Sheet
     = submit_tag 'Switch', {class: 'btn btn-mini'}
-%p
+%p#scale_notes
   Scale notes and numbers
 %p
   %table
@@ -30,13 +30,15 @@
 -else
   = render :partial=>'lead_sheet_style'
 
+#all-notes{data: {notes: all_notes(@song)}}
+
 - if !@song.song_names.blank?
   - @song.song_names.each do |song_name|
     %br= link_to "Song name: #{song_name.title}", song_name_path(song_name)
 
 %br
 = link_to 'Play', song_play_path(@song), remote: true
-%a#playnote{href: '#playnote'} Browser Play
+%a#play_song{href: '#play_song'} Browser Play
 %br
 = link_to 'Restart with a new key', root_path
 %br

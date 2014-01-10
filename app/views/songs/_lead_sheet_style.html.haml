@@ -14,6 +14,11 @@
               %tr
                 %td
                   = measure.melody_note(pos).name
+              %tr
+                %td
+                  - notes = measure.notes_by_position[pos].reverse.map(&:name)
+                  %a#play_chord{data: {notes: notes}, href: '#scale_notes'} play
+              
       %td
         %b
           |

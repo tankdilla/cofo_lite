@@ -1,20 +1,20 @@
 /todo: setup local variables instead of instance
 %table.display_notes
-  - @song.measures.each do |measure|
+  - @song.measures.each_with_index do |measure, measure_index|
     - measure.positions.each do |pos|
       %td(valign="top")
         %table
-          - measure.notes_by_position[pos].reverse.each do |measure_note|
+          - notes = measure.notes_by_position[pos].reverse.map(&:name)
+          - notes.each do |note|
             %tr
               %td
-                = measure_note.name
+                = note
               /= render :partial => 'edit_measure_note', locals: {song: @song, measure: measure, measure_note: measure_note, notes: @notes}
-
           %tr
             %td
-              = link_to 'edit', edit_song_measure_path(@song, measure, position: pos), remote: true
-
-#all-notes{data: {notes: all_notes(@song)}}
+              %a#play_chord{data: {notes: notes}, href: '#scale_notes'} play
+          %tr
+            %td= link_to 'edit', edit_song_measure_path(@song, measure, position: pos), remote: true
 
 .edit_measure_position
 
