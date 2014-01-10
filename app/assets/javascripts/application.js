@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-editable
+//= require midi_js
 //= require_tree .

@@ -14,6 +14,8 @@
             %td
               = link_to 'edit', edit_song_measure_path(@song, measure, position: pos), remote: true
 
+#all-notes{data: {notes: all_notes(@song)}}
+
 .edit_measure_position
 
 = render 'add_stuff'
