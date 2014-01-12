@@ -1,4 +1,4 @@
-%h3 
+%h3
   New song in the key of
   = @key
 %p
@@ -23,7 +23,7 @@
             %tr
               %td
                 = index+1
-            
+
 
 -if session[:note_style] == 'all_notes'
   = render :partial=>'all_notes'
@@ -36,9 +36,8 @@
   - @song.song_names.each do |song_name|
     %br= link_to "Song name: #{song_name.title}", song_name_path(song_name)
 
-%br
-= link_to 'Play', song_play_path(@song), remote: true
-%a#play_song{href: '#play_song'} Browser Play
+%a#play_song{href: '#play_song'} Play
+
 %br
 = link_to 'Restart with a new key', root_path
 %br

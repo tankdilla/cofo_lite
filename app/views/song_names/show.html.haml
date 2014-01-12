@@ -8,7 +8,7 @@
   %b Song Key:
   = @song_name.song.note.name
 
-- if false && @song_name.song_id
+- if @song_name.song_id
   %p
     %b= link_to "Song", song_path(@song_name.song_id)
 
