@@ -1,11 +1,12 @@
 class Verse < ActiveRecord::Base
   belongs_to :song_name
   has_many :word_notes, :dependent=>:destroy
-  
+
   attr_accessible :line_number, :song_id, :words
 
   def get_note_number_at(position)
-    word_note_by_position(position).try(:note_number)
+    word_note = word_note_by_position(position)
+    [word_note.try(:note_number), word_note.try(:note_modifier)]
   end
 
   def word_note_by_position(position)

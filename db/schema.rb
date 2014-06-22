@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217024339) do
+ActiveRecord::Schema.define(:version => 20140622023952) do
 
   create_table "chord_definitions", :force => true do |t|
     t.integer  "chord_id"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20131217024339) do
     t.integer  "note_number"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "note_modifier"
   end
 
 end

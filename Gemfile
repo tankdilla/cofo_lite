@@ -31,6 +31,7 @@ end
 
 group :development, :test do
   gem "jazz_hands"
+  gem 'pry-byebug'
   gem "cucumber-rails", :require => false
   gem "rspec-rails"
   # gem "micromidi"
@@ -42,5 +43,5 @@ gem 'jquery-rails', '~> 2.3.0'
 gem "factory_girl_rails"
 
 gem 'thin'
-
 gem 'devise'
+gem 'better_errors'

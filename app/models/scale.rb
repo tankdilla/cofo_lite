@@ -1,10 +1,10 @@
 class Scale
   attr_accessor :key_note, :mode, :scale_notes
-  
+
   def initialize(key="")
     @scale_notes = Array.new
   end
-  
+
   def scale_note_names
     scale_notes.collect(&:name)
   end
@@ -12,14 +12,14 @@ class Scale
   def note_position(letter)
     scale_note_names.index(letter)+1
   end
-  
+
   def get_note(options)
     if !options[:scale_number].nil?
-      
+
       #having to do this dance with the number because the scale index starts at 0, but i want to keep the scale numbering as 1-7
       scale_note = @scale_notes[cycle(options[:scale_number]-1)]
-      
-      if options[:modifier] 
+
+      if options[:modifier].present?
         if options[:modifier] == "b"
           scale_note.note.flat
         elsif options[:modifier] == "#"
@@ -31,14 +31,14 @@ class Scale
     else
       nil
     end
-      
+
   end
-  
+
   def get_position(options)
     position = modifier = nil
     if options[:note]
       position = @scale_notes.index{|n| n.name == options[:note]}
-      
+
       if position.nil?
         #try with flat
         position = @scale.scale_notes.index{|n| n.name == "#{options[:note]}b"}
@@ -49,16 +49,16 @@ class Scale
     end
     [position+1, modifier]
   end
-  
+
   def cycle(order)
     if order > 6
       order = order - 7
     end
-    
+
     if order < 0
       order = order + 7
     end
-    
+
     order
   end
 
@@ -67,20 +67,20 @@ class Scale
   end
 
   def chords_for_scale_notes
-    @chords_for_scale_notes ||= scale_notes.collect{|scale_note| Chord.formatted_chord(:chord_string=>scale_note.description)}    
+    @chords_for_scale_notes ||= scale_notes.collect{|scale_note| Chord.formatted_chord(:chord_string=>scale_note.description)}
   end
-  
+
   class << self
     def create_scale(key, mode_string="I")
       mode_string = resolve_mode(mode_string)
-      
+
       key_note = Note.find_by_name(key)
       mode = Mode.find_by_letter(mode_string)
-      
+
       scale = Scale.new
       scale.key_note = key
       scale.mode = mode_string
-      
+
       n = 1
       note = key_note
       mode.mode_intervals.each do |i|
@@ -88,12 +88,12 @@ class Scale
         note = note.next_note(i)
         n += 1
       end
-      
+
       scale.scale_notes << ScaleNote.new(:note_id => Note.where(name: "rest").first.id, :scale_number=>99, :scale=>scale, :mode_letter => "")
 
       scale
     end
-    
+
     def resolve_mode(mode_string)
       case mode_string
         when "major", "1"
