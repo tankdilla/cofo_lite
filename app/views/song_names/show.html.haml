@@ -8,6 +8,18 @@
   %b Song Key:
   = @song_name.song.note.name
 
+%p
+  %b Artist:
+  = @song_name.artist
+
+%p
+  %b Genre:
+  = @song_name.genre
+
+%p
+  %b Album:
+  = @song_name.album
+
 - if @song_name.song_id
   %p
     %b= link_to "Song", song_path(@song_name.song_id)
