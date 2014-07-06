@@ -30,7 +30,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem "jazz_hands"
+  gem 'pry'
   gem 'pry-byebug'
   gem "cucumber-rails", :require => false
   gem "rspec-rails"

@@ -65,7 +65,7 @@ class SongNamesController < ApplicationController
   # PUT /song_names/1.json
   def update
     @song_name = SongName.find(params[:id])
-
+    binding.pry
     respond_to do |format|
       if @song_name.update_attributes(params[:song_name])
 
@@ -106,7 +106,7 @@ class SongNamesController < ApplicationController
 
     unless params[:delete]
       verse = Verse.new(params[:verse])
-      @song_name.verses << verse  
+      @song_name.verses << verse
     end
 
     respond_to { |format|
@@ -123,7 +123,7 @@ class SongNamesController < ApplicationController
 
     respond_to { |format|
       format.html { redirect_to song_name_edit_verses_url(@song_name) }
-      format.js { 
+      format.js {
         @edit = true
         @verse = Verse.new
         render 'update_verse'
@@ -147,8 +147,16 @@ class SongNamesController < ApplicationController
 
   def add_song_note
     @song_name = SongName.find(params[:song_name_id])
-    WordNote.create!(params[:word_note])
-    
+
+    word_note_params = params[:word_note]
+
+    existing = WordNote.where(verse_id: word_note_params[:verse_id], line_position: word_note_params[:line_position]).first
+    if existing.present?
+      existing.update_attributes(note_number: word_note_params[:note_number], note_modifier: word_note_params[:note_modifier])
+    else
+      WordNote.create!(params[:word_note])
+    end
+
     respond_to { |format|
       format.js {
         @edit = true
