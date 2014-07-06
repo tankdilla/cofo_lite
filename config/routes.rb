@@ -3,7 +3,9 @@ CofoLite::Application.routes.draw do
 
   resources :song_names do
     get 'edit_verses'
+    get 'edit_a_verse'
     post 'update_verse'
+    put 'update_verse'
 
     get 'edit_song_note'
     post 'add_song_note'
