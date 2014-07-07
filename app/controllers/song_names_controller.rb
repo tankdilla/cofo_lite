@@ -65,7 +65,7 @@ class SongNamesController < ApplicationController
   # PUT /song_names/1.json
   def update
     @song_name = SongName.find(params[:id])
-    binding.pry
+
     respond_to do |format|
       if @song_name.update_attributes(params[:song_name])
 
@@ -115,12 +115,21 @@ class SongNamesController < ApplicationController
   def update_verse
     @song_name = SongName.find(params[:song_name_id])
 
-    if params[:verse_id]
-      verse = Verse.find(params[:verse_id])
-      verse.update_attributes(words: params[:verse][:words])
+    if params[:all_words]
+      verses = params[:all_words].split("\r\n")
+      verses.each_with_index do |verse, index|
+        @song_name.verses << Verse.new(line_number: index, words: verse)
+      end
+
     else
-      verse = Verse.new(params[:verse])
-      @song_name.verses << verse
+
+      if params[:verse_id]
+        verse = Verse.find(params[:verse_id])
+        verse.update_attributes(words: params[:verse][:words])
+      else
+        verse = Verse.new(params[:verse])
+        @song_name.verses << verse
+      end
     end
 
     respond_to { |format|

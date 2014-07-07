@@ -1,0 +1,6 @@
+= form_for @verse, url: song_name_update_verse_path(@song_name, verse_id: @verse.id) do |f|
+  .bulk-text
+    %h4 Paste song lyrics
+    = text_area_tag :all_words, nil, class: 'span6', rows: 30
+  .submit
+    = f.submit
