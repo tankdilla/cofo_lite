@@ -1,0 +1,22 @@
+- unless verses.empty?
+  %table.verses
+    - verses.each do |verse|
+      %tr{id: "verse-#{verse.id}"}
+        - verse.words.split(" ").each_with_index do |word, index|
+          %td
+            %table{width: '100%'}
+              %tr
+                %td{id: "#{verse.id}_#{index}", align: 'center'}= render 'verses/show_verse_word', verse: verse, index: index
+              %tr
+                %td{align: 'center'}= word
+        %td
+          %table
+            - if @edit
+              %tr
+                %td= link_to 'edit', song_name_edit_a_verse_path(verse.song_name_id, verse_id: verse), remote: true
+                %td= link_to 'delete', song_name_delete_verse_path(verse.song_name_id, verse_id: verse), remote: true
+            %tr
+              %td &nbsp;
+    %tr
+      %td
+        &nbsp;

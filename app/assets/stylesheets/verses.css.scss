@@ -1,0 +1,29 @@
+table.verses {
+
+  td {
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
+ul.verses {
+  list-style: none;
+
+  li.verse-row {
+    margin: 1px;
+    padding: 1px;
+
+    .word-note, .end-verse {
+      display: inline-block;
+      margin: 1px;
+      padding: 1px;
+    }
+
+    .end-verse {
+      .verse-edit, .verse-delete {
+        display: inline;
+      }
+    }
+
+  }
+}
