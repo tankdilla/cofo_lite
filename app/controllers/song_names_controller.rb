@@ -177,8 +177,13 @@ class SongNamesController < ApplicationController
     word_note_params = params[:word_note]
 
     existing = WordNote.where(verse_id: word_note_params[:verse_id], line_position: word_note_params[:line_position]).first
+
     if existing.present?
-      existing.update_attributes(note_number: word_note_params[:note_number], note_modifier: word_note_params[:note_modifier])
+      existing.update_attributes(
+        note_number: word_note_params[:note_number],
+        note_modifier: word_note_params[:note_modifier],
+        chord_id: word_note_params[:chord_id]
+      )
     else
       WordNote.create!(params[:word_note])
     end
