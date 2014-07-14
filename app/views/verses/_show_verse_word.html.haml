@@ -1,13 +1,13 @@
-- note_number, modifier = verse.get_note_number_at(index)
-- if note_number
+- note = verse.get_note_number_at(index)
+- if note && note.note_number
   - unless @show_notes
     - if @edit
-      = link_to "#{modifier}#{note_number}", song_name_edit_song_note_path(verse.song_name_id,
+      = link_to note.description, song_name_edit_song_note_path(verse.song_name_id,
             edit_index: index, verse_id: verse, edit_note: true), remote: true
     - else
-      = "#{modifier}#{note_number}"
+      = note.description
   - else
-    = Chord.chord_by_scale_and_number(@song_name.song.note.name, note_number, modifier: modifier)
+    = Chord.chord_by_scale_and_number(@song_name.song.note.name, note.note_number, modifier: note.note_modifier, chord: note.try(:chord))
 - else
   - if @edit
     %span.add_note

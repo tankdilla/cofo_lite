@@ -5,8 +5,7 @@ class Verse < ActiveRecord::Base
   attr_accessible :line_number, :song_id, :words
 
   def get_note_number_at(position)
-    word_note = word_note_by_position(position)
-    [word_note.try(:note_number), word_note.try(:note_modifier)]
+    word_note_by_position(position)
   end
 
   def word_note_by_position(position)

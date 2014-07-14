@@ -31,6 +31,7 @@ end
 
 group :development, :test do
   gem 'pry'
+  gem 'binding_of_caller'
   gem 'pry-byebug'
   gem "cucumber-rails", :require => false
   gem "rspec-rails"

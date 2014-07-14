@@ -215,7 +215,12 @@ class Chord < ActiveRecord::Base
 
       scale = Scale.create_scale(key)
       note = scale.get_note(scale_number: chord_number, modifier: options[:modifier])
-      formatted = formatted_chord(chord_string: "#{note.name}, #{chord_number}")
+      formatted =
+        if options[:chord]
+          options[:chord]
+        else
+          formatted_chord(chord_string: "#{note.name}, #{chord_number}")
+        end
 
       if [3, 6, 7].include? number
         "#{note.name}#{formatted.abbrev} / #{scale.get_note(scale_number: number).name}"

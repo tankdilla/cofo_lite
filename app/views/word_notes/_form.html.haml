@@ -1,6 +1,7 @@
 = form_for :word_note, url: song_name_add_song_note_path(@song_name), remote: true, class: 'no_margin_form' do |f|
   = f.select :note_number, [1,2,3,4,5,6,7], {}, id: 'note_number_field', class: 'span1'
   = f.select :note_modifier, ['', '#','b'], {}, class: 'span1'
+  = f.collection_select :chord_id, Chord.all, :id, :abbrev, {include_blank: true}, {class: 'span1'}
   = f.hidden_field :line_position, {value: index}
   = f.hidden_field :verse_id, {value: verse_id}
 
