@@ -7,6 +7,8 @@
     All Notes
     = radio_button_tag('note_style', 'lead_sheet', session[:note_style]=='lead_sheet')
     Lead Sheet
+    = check_box_tag 'all_notes', '1', params[:all_notes] == '1'
+    All Notes
     = submit_tag 'Switch', {class: 'btn btn-mini'}
 %p#scale_notes
   Scale notes and numbers

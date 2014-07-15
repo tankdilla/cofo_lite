@@ -7,7 +7,7 @@
     - else
       = note.description
   - else
-    = Chord.chord_by_scale_and_number(@song_name.song.note.name, note.note_number, modifier: note.note_modifier, chord: note.try(:chord))
+    = Chord.chord_by_scale_and_number(@song_name.note.name, note.note_number, modifier: note.note_modifier, chord: note.try(:chord))
 - else
   - if @edit
     %span.add_note

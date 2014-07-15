@@ -26,13 +26,14 @@ class SongsController < ApplicationController
       scale = Scale.create_scale(@key)
       session[:scale] = scale
     else
-      scale = session[:scale]
+      scale = params[:all_notes] == '1' ? Scale.create_scale(@key, 'all') : session[:scale]
     end
 
     # @notes = scale.scale_notes
     @progressions = Progression.all
 
-    setup_song_measure_edit
+    @chord_names = Chord.all
+    @notes = scale.scale_notes
   end
 
   def create
