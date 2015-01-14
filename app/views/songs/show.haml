@@ -39,8 +39,3 @@
     %br= link_to "Song name: #{song_name.title}", song_name_path(song_name)
 
 %a#play_song{href: '#play_song'} Play
-
-%br
-= link_to 'Restart with a new key', root_path
-%br
-= link_to 'Clear Song', song_clear_path(@song)
