@@ -8,7 +8,7 @@
 
   - @song_names.each do |song_name|
     %tr
-      %td= link_to song_name.title, song_name
+      %td= link_to "#{song_name.title} - #{song_name.artist}", song_name
       %td= song_name.description
       %td
 
