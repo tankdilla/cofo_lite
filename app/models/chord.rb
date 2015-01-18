@@ -103,11 +103,11 @@ class Chord < ActiveRecord::Base
           chord =
             case chord_options[:chord_letter]
             when "I", "IV"
-              Chord.where(name: "major 7").first
+              Chord.where(name: "major").first #"major 7"
             when "II", "III", "VI"
-              Chord.where(name: "minor 7").first
+              Chord.where(name: "minor").first #"minor 7"
             when "V"
-              Chord.where(name: "dominant 7").first
+              Chord.where(name: "major").first #"dominant 7"
             when "VII"
               Chord.where(name: "diminished 7").first
             end
