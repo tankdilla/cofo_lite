@@ -113,7 +113,7 @@ class VersesController < ApplicationController
     new_verse = Verse.new(verse.attributes.except(*%w(id created_at updated_at)))
     @song_name.verses << new_verse
 
-    verse.word_notes.each { |n| new_verse.word_notes << WordNote.new(verse.attributes.except(*%w(id verse_id created_at updated_at))) }
+    verse.word_notes.each { |n| new_verse.word_notes << WordNote.new(n.attributes.except(*%w(id verse_id created_at updated_at))) }
 
     respond_to { |format|
       format.js {
