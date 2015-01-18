@@ -27,7 +27,7 @@
 %p
   %b Lyrics:
 #verses
-  = render 'verses/show_verses', verses: @song_name.verses.includes(:word_notes), song_notes: @song_notes
+  = render 'verses/show_verses', verses: @song_name.verses.includes(:word_notes).to_a, song_notes: @song_notes
 
 %p
   %ul.nav

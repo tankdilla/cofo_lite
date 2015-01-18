@@ -6,6 +6,10 @@ CofoLite::Application.routes.draw do
     post 'add_song_note'
 
     resources :verses do
+      member do
+        get 'clone'
+      end
+
       resources :word_notes
     end
 

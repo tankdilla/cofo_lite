@@ -108,6 +108,22 @@ class VersesController < ApplicationController
     }
   end
 
+  def clone
+    verse = Verse.find(params[:id])
+    new_verse = Verse.new(verse.attributes.except(*%w(id created_at updated_at)))
+    @song_name.verses << new_verse
+
+    verse.word_notes.each { |n| new_verse.word_notes << WordNote.new(verse.attributes.except(*%w(id verse_id created_at updated_at))) }
+
+    respond_to { |format|
+      format.js {
+        @edit = true
+        @verse = Verse.new
+        render 'update'
+      }
+    }
+  end
+
   private
   def get_song_name
     @song_name = SongName.find(params[:song_name_id])

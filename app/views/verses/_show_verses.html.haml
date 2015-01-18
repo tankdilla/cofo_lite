@@ -4,9 +4,10 @@
       %li.verse-row{id: "verse-#{verse.id}"}
         - verse.words.split(" ").each_with_index do |word, index|
           .word-note
-            .note{id: "#{verse.id}_#{index}", align: 'center'}= render 'verses/show_verse_word', verse: verse, index: index
+            .note{id: "#{verse.id}_#{index}", align: 'center'}= render 'verses/show_verse_word', verse: verse, index: index, note: verse.word_notes.find { |n| n.line_position == index }
             .word{align: 'center'}= word
         .end-verse
           - if @edit
             .verse-edit= link_to 'edit', edit_song_name_verse_path(verse.song_name_id, verse), remote: true
             .verse-delete= link_to 'delete', song_name_verse_path(verse.song_name_id, verse), method: :delete, remote: true
+            .verse-edit= link_to 'clone', clone_song_name_verse_path(verse.song_name_id, verse), remote: true
