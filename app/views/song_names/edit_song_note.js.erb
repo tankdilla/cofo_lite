@@ -3,5 +3,5 @@
   $("<%= @tag %>").popover('show');
   $("#note_number_field").focus();
 <% else %>
-  $("<%= @tag %>").html("<%= escape_javascript render 'verses/show_verse_word', index: @edit_index, verse: @verse %>");
+  $("<%= @tag %>").html("<%= escape_javascript render 'verses/show_verse_word', index: @edit_index, verse: @verse, note: @verse.word_notes.find { |n| n.line_position == @edit_index } %>");
 <% end %>
