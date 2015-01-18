@@ -16,3 +16,5 @@
 
 #Ignore files with a tilde at the end of the filename
 /*~
+
+.DS_Store

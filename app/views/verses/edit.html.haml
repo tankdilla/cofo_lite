@@ -1,7 +1,15 @@
-%h1 Editing verse
+%p
+  %b Enter lyrics for :
+  = @song_name.title
 
-= render 'form'
+#verses
+  = render 'verses/show_verses', verses: @song_name.verses, song_notes: @song_notes
 
-= link_to 'Show', @verse
-\|
-= link_to 'Back', verses_path
+#add_verse
+  = render 'verses/form'
+
+#bulk_add
+  = render 'verses/bulk_form'
+
+%p
+  = link_to 'Done', song_name_path(@song_name)

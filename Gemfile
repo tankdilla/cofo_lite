@@ -40,7 +40,7 @@ end
 
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
-gem 'jquery-rails', '~> 2.3.0'
+gem 'jquery-rails', '~> 3.1.2'
 gem "factory_girl_rails"
 
 gem 'thin'

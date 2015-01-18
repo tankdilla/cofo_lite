@@ -1,8 +1,11 @@
 class VersesController < ApplicationController
-  # GET /verses
-  # GET /verses.json
+  before_filter :get_song_name
+
   def index
-    @verses = Verse.all
+    @verses = @song_name.verses
+
+    @verse = Verse.new
+    @edit = true
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,8 +13,6 @@ class VersesController < ApplicationController
     end
   end
 
-  # GET /verses/1
-  # GET /verses/1.json
   def show
     @verse = Verse.find(params[:id])
 
@@ -21,8 +22,6 @@ class VersesController < ApplicationController
     end
   end
 
-  # GET /verses/new
-  # GET /verses/new.json
   def new
     @verse = Verse.new
 
@@ -32,52 +31,85 @@ class VersesController < ApplicationController
     end
   end
 
-  # GET /verses/1/edit
+  def create
+    if params[:all_words]
+      verses = params[:all_words].split("\r\n")
+      verses.each_with_index do |verse, index|
+        @song_name.verses << Verse.new(line_number: index, words: verse)
+      end
+
+    else
+
+      if params[:id]
+        verse = Verse.find(params[:id])
+        verse.update_attributes(words: params[:verse][:words])
+      else
+        verse = Verse.new(params[:verse])
+        @song_name.verses << verse
+      end
+    end
+
+    respond_to do |format|
+      format.js {
+        @edit = true
+        @verse = Verse.new
+        render 'update'
+      }
+      format.html { redirect_to song_name_verses_url(@song_name) }
+    end
+  end
+
   def edit
     @verse = Verse.find(params[:id])
-  end
-
-  # POST /verses
-  # POST /verses.json
-  def create
-    @verse = Verse.new(params[:verse])
 
     respond_to do |format|
-      if @verse.save
-        format.html { redirect_to @verse, notice: 'Verse was successfully created.' }
-        format.json { render json: @verse, status: :created, location: @verse }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @verse.errors, status: :unprocessable_entity }
-      end
+      format.js {}
     end
   end
 
-  # PUT /verses/1
-  # PUT /verses/1.json
-  def update
-    @verse = Verse.find(params[:id])
+  def update # update_verse
+    if params[:all_words]
+      verses = params[:all_words].split("\r\n")
+      verses.each_with_index do |verse, index|
+        @song_name.verses << Verse.new(line_number: index, words: verse)
+      end
 
-    respond_to do |format|
-      if @verse.update_attributes(params[:verse])
-        format.html { redirect_to @verse, notice: 'Verse was successfully updated.' }
-        format.json { head :no_content }
+    else
+
+      if params[:id]
+        verse = Verse.find(params[:id])
+        verse.update_attributes(words: params[:verse][:words])
       else
-        format.html { render action: "edit" }
-        format.json { render json: @verse.errors, status: :unprocessable_entity }
+        verse = Verse.new(params[:verse])
+        @song_name.verses << verse
       end
     end
+
+    respond_to { |format|
+      format.html { redirect_to song_name_verses_url(@song_name) }
+      format.js do
+        @edit = true
+        @verse = Verse.new
+      end
+    }
   end
 
-  # DELETE /verses/1
-  # DELETE /verses/1.json
-  def destroy
+  def destroy # delete_verse
+    verse = Verse.find(params[:id])
+    verse.destroy
+
+    respond_to { |format|
+      format.html { redirect_to song_name_edit_verses_url(@song_name) }
+      format.js {
+        @edit = true
+        @verse = Verse.new
+        render 'update'
+      }
+    }
+  end
+
+  private
+  def get_song_name
     @song_name = SongName.find(params[:song_name_id])
-
-    respond_to do |format|
-      format.html { redirect_to verses_url }
-      format.js
-      format.json { head :no_content }
-    end
   end
 end

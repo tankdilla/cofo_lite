@@ -27,12 +27,12 @@
 %p
   %b Lyrics:
 #verses
-  = render 'verses/show_verses', verses: @song_name.verses, song_notes: @song_notes
+  = render 'verses/show_verses', verses: @song_name.verses.includes(:word_notes), song_notes: @song_notes
 
 %p
   %ul.nav
     - if user_signed_in?
-      %li= link_to 'Edit Song Lyrics', song_name_edit_verses_path(@song_name)
+      %li= link_to 'Edit Song Lyrics', song_name_verses_path(@song_name)
     %li
       - if @show_notes
         = link_to 'Show Chord Numbers', song_name_path(@song_name)

@@ -94,69 +94,6 @@ class SongNamesController < ApplicationController
     end
   end
 
-  def edit_verses
-    @song_name = SongName.find(params[:song_name_id])
-    @verses = @song_name.verses
-    @verse = Verse.new
-    @edit = true
-  end
-
-  def edit_a_verse
-    @song_name = SongName.find(params[:song_name_id])
-
-    respond_to do |format|
-      format.html {}
-      format.js {
-        @verse = Verse.find(params[:verse_id])
-      }
-    end
-  end
-
-  def update_verse
-    @song_name = SongName.find(params[:song_name_id])
-
-    if params[:all_words]
-      verses = params[:all_words].split("\r\n")
-      verses.each_with_index do |verse, index|
-        @song_name.verses << Verse.new(line_number: index, words: verse)
-      end
-
-    else
-
-      if params[:verse_id]
-        verse = Verse.find(params[:verse_id])
-        verse.update_attributes(words: params[:verse][:words])
-      else
-        verse = Verse.new(params[:verse])
-        @song_name.verses << verse
-      end
-    end
-
-    respond_to { |format|
-      format.html { redirect_to song_name_edit_verses_url(@song_name) }
-      format.js do
-        @edit = true
-        @verse = Verse.new
-      end
-    }
-  end
-
-  def delete_verse
-    @song_name = SongName.find(params[:song_name_id])
-
-    verse = Verse.find(params[:verse_id])
-    verse.destroy
-
-    respond_to { |format|
-      format.html { redirect_to song_name_edit_verses_url(@song_name) }
-      format.js {
-        @edit = true
-        @verse = Verse.new
-        render 'update_verse'
-      }
-    }
-  end
-
   def edit_song_note
     @song_name = SongName.find(params[:song_name_id])
     @edit_index = params[:edit_index].to_i
@@ -192,7 +129,7 @@ class SongNamesController < ApplicationController
       format.js {
         @edit = true
         @verse = Verse.new
-        render 'update_verse'
+        render 'verses/update'
       }
     }
   end

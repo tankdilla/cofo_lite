@@ -11,9 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
-//= require bootstrap-editable
+//= require bootstrap-editable/bootstrap-editable
 //= require midi_js
 //= require_tree .
