@@ -1,12 +1,12 @@
-== COFO
-COFO (Circle of Fifths online) is a web app designed for creating music.  The idea behind the app is to allow the user to build songs by using chords that follow along the circle of fifths.  The user doesn't need prior knowledge of the circle of fifths, but hopefully through using the app, the user can pick up how it works, how it's used in music, and possibly want to learn more.
+== aChordr
+aChordr is a web app designed for creating music.  The idea behind the app is to allow the user to build songs by using chords that follow along the circle of fifths.  The user doesn't need prior knowledge of the circle of fifths, but hopefully through using the app, the user can pick up how it works, how it's used in music, and possibly want to learn more.
 
 In the future, I hope to allow the app to play notes and music through the browser, but for the time being, notes and music can be played on a user's local machine by running the app through a command line webserver. (ie the 'rails server' command)
 
 == Features
-The app is still a work in progress, but you can currently plot notes, chords, and progressions into a song, which at this point is basically a structure for holding chords and notes.  Notes and chords can be inverted, edited, and cleared.  
+The app is still a work in progress, but you can currently plot notes, chords, and progressions into a song, which at this point is basically a structure for holding chords and notes.  Notes and chords can be inverted, edited, and cleared.
 
-Currently working on: 
+Currently working on:
 - adding chord with melody note (such as you'd do when playing jazz from a lead sheet)
 - inserting a chord, note, or progression into a song at any point, ie in between 2 notes/chords
 - playing notes/chords through the browser (down the line, currently sound is generated and played using micromidi/unimidi.)

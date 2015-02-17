@@ -8,6 +8,8 @@ table.verses {
 
 ul.verses {
   list-style: none;
+  margin-top: 30px;
+  margin-left: 0px;
 
   li.verse-row {
     margin: 1px;
@@ -17,6 +19,16 @@ ul.verses {
       display: inline-block;
       margin: 1px;
       padding: 1px;
+      font-size: 16px;
+
+      .note {
+        margin: 0px;
+        font-size: 20px;
+      }
+
+      .word {
+        font-size: 16px;
+      }
     }
 
     .end-verse {

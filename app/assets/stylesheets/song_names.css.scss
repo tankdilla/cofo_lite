@@ -1,7 +1,44 @@
-// Place all the styles related to the SongNames controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 .no_margin_form {
   margin: 0px;
 }
+
+.song-name-description {
+  font-size: 24px;
+  font-weight: 175;
+
+  margin-bottom: 10px;
+}
+
+.song-names {
+  display: inline-block;
+
+  .song-name {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .artist {
+    font-size: 18px;
+  }
+}
+
+.song-info {
+  .song-title{
+    display: inline-block;
+    font-size: 24px;
+  }
+
+  .song-key {
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .artist {
+    font-size: 20px;
+  }
+
+  .album {
+    font-size: 16px;
+  }
+}
+

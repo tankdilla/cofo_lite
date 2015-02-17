@@ -1,17 +1,14 @@
-%h3 Songs
+.song-name-description Chords for Gospel Music
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
+%table.song-names
   - @song_names.each do |song_name|
     %tr
-      %td= link_to "#{song_name.title} - #{song_name.artist}", song_name
-      %td= song_name.description
       %td
-
+        %span.song-name
+          = link_to "#{song_name.title}", song_name
+        by
+        %span.artist
+          = song_name.artist
 %br
 
 = link_to 'Create a song', new_song_name_path if user_signed_in?

@@ -389,6 +389,7 @@ GEM
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.7.0)
     warden (1.2.3)
       rack (>= 1.0)
     xpath (2.0.0)
@@ -418,3 +419,4 @@ DEPENDENCIES
   sqlite3
   thin
   uglifier (>= 1.0.3)
+  underscore-rails (~> 1.7.0)

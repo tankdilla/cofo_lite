@@ -38,6 +38,7 @@ group :development, :test do
   # gem "micromidi"
 end
 
+gem 'underscore-rails', '~> 1.7.0'
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem 'jquery-rails', '~> 3.1.2'

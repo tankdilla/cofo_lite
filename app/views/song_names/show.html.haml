@@ -1,31 +1,17 @@
 %p#notice= notice
 
-%p
-  %b Title:
-  = @song_name.title
+.song-info
+  .song-title
+    = @song_name.title
+  .song-key
+    in
+    = @song_name.note.name
+  .artist
+    = @song_name.artist
+  .album
+    = @song_name.album
 
 %p
-  %b Song Key:
-  = @song_name.note.name
-
-%p
-  %b Artist:
-  = @song_name.artist
-
-%p
-  %b Genre:
-  = @song_name.genre
-
-%p
-  %b Album:
-  = @song_name.album
-
-- if @song_name.song_id
-  %p
-    %b= link_to "Song", song_path(@song_name.song_id)
-
-%p
-  %b Lyrics:
 #verses
   = render 'verses/show_verses', verses: @song_name.verses.includes(:word_notes).to_a, song_notes: @song_notes
 
