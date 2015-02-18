@@ -1,8 +1,8 @@
 .song-name-description Chords for Gospel Music
 
-%table.song-names
+%ul.song-names
   - @song_names.each do |song_name|
-    %tr
+    %li.song-row
       %td
         %span.song-name
           = link_to "#{song_name.title}", song_name

@@ -9,16 +9,22 @@
   margin-bottom: 10px;
 }
 
-.song-names {
+ul.song-names {
   display: inline-block;
+  list-style: none;
+  margin-left: 0;
 
-  .song-name {
-    font-size: 18px;
-    font-weight: 400;
-  }
+  li.song-row {
+    margin: 6px 0 6px 0;
 
-  .artist {
-    font-size: 18px;
+    .song-name {
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    .artist {
+      font-size: 18px;
+    }
   }
 }
 
