@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require bootstrap
+//= require bootstrap-editable/bootstrap-editable
 //= require midi_js
 //= require underscore
 //= require_tree .

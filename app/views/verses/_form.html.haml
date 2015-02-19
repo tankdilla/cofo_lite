@@ -1,5 +1,4 @@
-.word-note-form
-  = form_for [@song_name, @verse], remote: true do |f|
-    = f.text_field :words, id: 'words_field'
+= form_for [@song_name, @verse], remote: true do |f|
+  = f.text_field :words, id: 'words_field'
 
-    = f.submit '+'
+  = f.submit '+'
